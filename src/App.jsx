@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Float, Html, Image, Sparkles, Text } from "@react-three/drei";
+import { Float, Html, Billboard, useTexture, Sparkles, Text } from "@react-three/drei";
 import gsap from "gsap";
+import Lenis from "lenis";
 
 const EVENT_DATE = new Date("2026-06-14T15:00:00");
 const GOLD = "#d6b36b";
@@ -80,12 +81,58 @@ function CameraRig({ progress }) {
   const { camera } = useThree();
 
   useFrame(() => {
-    const targetZ = 8 - progress * 56;
+    const targetZ = 8 - progress * 60;
     camera.position.z += (targetZ - camera.position.z) * 0.08;
     camera.lookAt(0, 0, -20);
   });
 
   return null;
+}
+
+function FloralTunnel() {
+  return (
+    <>
+      <Sparkles
+        count={300}
+        scale={[20, 20, 60]}
+        size={2}
+        speed={0.3}
+        color="#ffffff"
+        opacity={0.6}
+        position={[0, 0, -25]}
+      />
+      <Sparkles
+        count={200}
+        scale={[25, 25, 70]}
+        size={4}
+        speed={0.1}
+        color={GOLD}
+        opacity={0.4}
+        position={[0, 0, -25]}
+      />
+    </>
+  );
+}
+
+function FloatingRings() {
+  const rings = Array.from({ length: 6 }).map((_, i) => ({
+    z: -8 - i * 8,
+    rotX: Math.random() * Math.PI,
+    rotY: Math.random() * Math.PI,
+  }));
+
+  return (
+    <group>
+      {rings.map((ring, i) => (
+        <Float key={i} speed={1.5} rotationIntensity={1} floatIntensity={2}>
+          <mesh position={[0, 0, ring.z]} rotation={[ring.rotX, ring.rotY, 0]}>
+            <torusGeometry args={[3.5, 0.05, 16, 100]} />
+            <meshStandardMaterial color={GOLD} metalness={1} roughness={0.1} />
+          </mesh>
+        </Float>
+      ))}
+    </group>
+  );
 }
 
 function Verse({ progress }) {
@@ -133,62 +180,23 @@ function Verse({ progress }) {
 }
 
 function PhotoPlane({ url, z, rot = [0, 0, 0] }) {
+  const texture = useTexture(url);
+
   return (
     <Float speed={1.2} rotationIntensity={0.35} floatIntensity={1.6}>
       <group position={[0, 0, z]} rotation={rot}>
-        <mesh position={[0, 0, -0.05]}>
-          <planeGeometry args={[8.8, 5.8]} />
-          <meshStandardMaterial color="#20110b" metalness={0.3} roughness={0.65} />
-        </mesh>
-        <Image url={url} transparent toneMapped position={[0, 0, 0]} scale={[8.2, 5.2, 1]} />
+        <Billboard>
+          <mesh position={[0, 0, -0.05]}>
+            <planeGeometry args={[8.8, 5.8]} />
+            <meshStandardMaterial color="#20110b" metalness={0.3} roughness={0.65} />
+          </mesh>
+          <mesh position={[0, 0, 0]}>
+            <planeGeometry args={[8.2, 5.2]} />
+            <meshStandardMaterial map={texture} toneMapped transparent />
+          </mesh>
+        </Billboard>
       </group>
     </Float>
-  );
-}
-
-function FloralTunnel() {
-  return (
-    <>
-      <Sparkles
-        count={300}
-        scale={[20, 20, 60]}
-        size={2}
-        speed={0.3}
-        color="#ffffff"
-        opacity={0.6}
-        position={[0, 0, -25]}
-      />
-      <Sparkles
-        count={200}
-        scale={[25, 25, 70]}
-        size={4}
-        speed={0.1}
-        color={GOLD}
-        opacity={0.4}
-        position={[0, 0, -25]}
-      />
-    </>
-  );
-}
-
-function FloatingRings() {
-  const rings = Array.from({ length: 6 }).map((_, i) => ({
-    z: -8 - i * 8,
-    rotX: Math.random() * Math.PI,
-    rotY: Math.random() * Math.PI,
-  }));
-
-  return (
-    <group>
-      {rings.map((ring, i) => (
-        <Float key={i} speed={1.5} rotationIntensity={1} floatIntensity={2}>
-          <mesh position={[0, 0, ring.z]} rotation={[ring.rotX, ring.rotY, 0]}>
-            <torusGeometry args={[3.5, 0.05, 16, 100]} />
-            <meshStandardMaterial color={GOLD} metalness={1} roughness={0.1} />
-          </mesh>
-        </Float>
-      ))}
-    </group>
   );
 }
 
@@ -259,9 +267,9 @@ function Scene({ progress }) {
     <>
       <color attach="background" args={[BROWN_DARK]} />
       <fog attach="fog" args={[BROWN_DARK, 18, 92]} />
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[2, 4, 2]} intensity={1.1} color="#ffd580" />
-      <pointLight position={[-8, 2, -16]} intensity={1} color="#c89a58" />
+      <ambientLight intensity={0.8} />
+      <directionalLight position={[2, 4, 2]} intensity={1.5} color="#ffd580" />
+      <pointLight position={[-8, 2, -16]} intensity={1.5} color="#c89a58" />
 
       <Sparkles
         count={240}
@@ -291,47 +299,99 @@ function Scene({ progress }) {
 export default function App() {
   const progress = useScrollProgress();
   const audioRef = useRef(null);
-  const startedRef = useRef(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
 
   useEffect(() => {
-    const beginAudio = () => {
-      if (startedRef.current || !audioRef.current) return;
-      startedRef.current = true;
-      audioRef.current.play().catch(() => {
-        startedRef.current = false;
-      });
-      window.removeEventListener("pointerdown", beginAudio);
-      window.removeEventListener("wheel", beginAudio);
-      window.removeEventListener("touchstart", beginAudio);
-      window.removeEventListener("keydown", beginAudio);
-    };
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: "vertical",
+      gestureDirection: "vertical",
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
 
-    window.addEventListener("pointerdown", beginAudio, { once: true });
-    window.addEventListener("wheel", beginAudio, { once: true });
-    window.addEventListener("touchstart", beginAudio, { once: true });
-    window.addEventListener("keydown", beginAudio, { once: true });
+    let reqId;
+    function raf(time) {
+      lenis.raf(time);
+      reqId = requestAnimationFrame(raf);
+    }
+
+    reqId = requestAnimationFrame(raf);
 
     return () => {
-      window.removeEventListener("pointerdown", beginAudio);
-      window.removeEventListener("wheel", beginAudio);
-      window.removeEventListener("touchstart", beginAudio);
-      window.removeEventListener("keydown", beginAudio);
+      lenis.destroy();
+      cancelAnimationFrame(reqId);
     };
   }, []);
 
+  const toggleAudio = () => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  const handleOpen = () => {
+    setIsOpened(true);
+    if (audioRef.current) {
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
   return (
     <div className="app-shell">
+      <div className={`intro-envelope ${isOpened ? "hidden" : ""}`}>
+        <h1>Invitation</h1>
+        <button className="open-btn" onClick={handleOpen}>
+          Click to Open
+        </button>
+      </div>
       <div className="gradient-layer" />
 
       <Canvas camera={{ position: [0, 0, 8], fov: 46 }}>
         <Scene progress={progress} />
       </Canvas>
 
-      <div className="ui-layer">
-        <Countdown />
+      <div className="scroll-sections">
+        <div className="section-container">
+          <h1 className="brutalist-text">ALTHAF & FATHIMA</h1>
+        </div>
+
+        <div className="section-container">
+          <div className="floral-border">
+            <h2 className="elegant-title">Counting Down</h2>
+            <Countdown />
+          </div>
+        </div>
+
+        <div className="section-container">
+          <div className="floral-border">
+            <h2 className="elegant-title">The Venue</h2>
+            <div className="map-container">
+              <iframe
+                title="Surabhi Auditorium Map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1136.216393527961!2d75.7330554!3d11.5645831!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba680482b84501b%3A0xe7bc32fcf224c657!2sSurabhi%20Auditorium!5e0!3m2!1sen!2sin!4v1715424000000!5m2!1sen!2sin"
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <audio ref={audioRef} src="/quran_audio.mp3" preload="auto" hidden loop />
+      <audio ref={audioRef} src="/quran.mp3" preload="auto" hidden loop />
+      <button className="audio-toggle" onClick={toggleAudio}>
+        {isPlaying ? 'Pause' : 'Play'}
+      </button>
       <div className="scroll-space" />
     </div>
   );
