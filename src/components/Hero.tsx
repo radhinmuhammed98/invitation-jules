@@ -183,23 +183,42 @@ export function Hero() {
           <div className="h-px flex-1 max-w-24" style={{ background: 'linear-gradient(90deg, rgba(201,150,42,0.6), transparent)' }} />
         </motion.div>
 
-        {/* Main names — THE STAR */}
+        {/* Title / Names with Antigravity float */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5, delay: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
-          className="mb-4 relative"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          animate={{
+            y: [0, -12, 0],
+            rotate: [-0.3, 0.3, -0.3],
+          }}
+          transition={{
+            opacity: { duration: 1.5, delay: 0.3 },
+            scale: { duration: 1.5, delay: 0.3 },
+            y: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
+            rotate: { duration: 6, repeat: Infinity, ease: 'easeInOut' },
+          }}
+          viewport={{ once: true }}
+          className="relative mb-8 sm:mb-12"
         >
-          {/* Glow behind text */}
-          <div
-            className="absolute inset-0 blur-3xl opacity-20 pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse, rgba(201,150,42,0.8), transparent 70%)' }}
-          />
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 1 }}
+            className="text-2xl sm:text-3xl md:text-4xl mb-4"
+            style={{
+              color: 'rgba(232,201,109,0.8)',
+              fontFamily: '"Amiri", serif',
+              fontWeight: 700,
+            }}
+          >
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+          </motion.p>
+
           <h1
-            className="relative leading-[1.05] tracking-wide"
+            className="leading-[1.1] sm:leading-tight"
             style={{
               fontFamily: '"Great Vibes", cursive',
-              fontSize: 'clamp(3.5rem, 12vw, 8rem)',
+              fontSize: 'clamp(3.5rem, 12vw, 7.5rem)',
               background: 'linear-gradient(135deg, #C9962A 0%, #E8C96D 40%, #FFF5CC 55%, #E8C96D 70%, #C9962A 100%)',
               backgroundSize: '200% auto',
               WebkitBackgroundClip: 'text',

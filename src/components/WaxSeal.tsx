@@ -370,12 +370,32 @@ export function WaxSeal({ onOpen, isOpen }: WaxSealProps) {
 
             {/* Title block */}
             <motion.div
-              animate={isRevealed ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
+              animate={
+                isRevealed
+                  ? { opacity: 0, y: -20 }
+                  : {
+                    opacity: 1,
+                    y: [0, -10, 0],
+                    rotate: [-0.5, 0.5, -0.5],
+                  }
+              }
+              transition={
+                isRevealed
+                  ? { duration: 0.3 }
+                  : {
+                    y: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
+                    rotate: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
+                  }
+              }
             >
               <p
-                className="text-2xl sm:text-3xl mb-1"
-                style={{ color: 'rgba(232,201,109,0.75)' }}
+                className="text-3xl sm:text-4xl mb-2"
+                style={{
+                  color: 'rgba(232,201,109,0.85)',
+                  fontFamily: '"Amiri", serif',
+                  fontWeight: 700,
+                  textShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                }}
               >
                 بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
               </p>
@@ -384,8 +404,9 @@ export function WaxSeal({ onOpen, isOpen }: WaxSealProps) {
                 className="mb-2 leading-tight"
                 style={{
                   fontFamily: '"Great Vibes", cursive',
-                  fontSize: 'clamp(2.2rem, 7vw, 3.8rem)',
+                  fontSize: 'clamp(2.5rem, 8vw, 4.2rem)',
                   color: '#E8C96D',
+                  textShadow: '0 4px 15px rgba(0,0,0,0.4)',
                 }}
               >
                 Wedding Invitation
