@@ -1,0 +1,366 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Lato:wght@300;400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Lato", sans-serif;
+  --font-script: "Great Vibes", cursive;
+  --font-display: "Cinzel", serif;
+
+  --color-w-cream: #FDF8F0;
+  --color-w-gold: #C9962A;
+  --color-w-gold-light: #E8C96D;
+  --color-w-rose: #C9636B;
+  --color-w-rose-light: #F4D1D3;
+  --color-w-emerald: #1A3A2F;
+  --color-w-emerald-mid: #2D5E47;
+  --color-w-emerald-light: #6BAF8A;
+  --color-w-ivory: #FEFCF7;
+  --color-w-blush: #F7E8E8;
+  --color-w-mauve: #8B5E6E;
+}
+
+/* ============================================
+   BASE RESET & TYPOGRAPHY
+   ============================================ */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    height: -webkit-fill-available;
+  }
+
+  body {
+    background-color: var(--color-w-cream);
+    color: var(--color-w-emerald);
+    font-family: var(--font-sans);
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    /* Safe area for notched phones */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Better button / link feel on mobile */
+  button, a {
+    touch-action: manipulation;
+    cursor: pointer;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  ::selection {
+    background: rgba(201, 150, 42, 0.25);
+    color: var(--color-w-emerald);
+  }
+}
+
+/* ============================================
+   CUSTOM KEYFRAME ANIMATIONS
+   ============================================ */
+
+/* Petal falling from sky */
+@keyframes petalFall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg) translateX(0px);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 0.8; }
+  100% {
+    transform: translateY(105vh) rotate(720deg) translateX(80px);
+    opacity: 0;
+  }
+}
+
+/* Sway left/right while falling */
+@keyframes petalSway {
+  0%, 100% { transform: translateX(0px); }
+  25% { transform: translateX(30px); }
+  75% { transform: translateX(-30px); }
+}
+
+/* Floral vine growing */
+@keyframes vineGrow {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Gentle pulse for glows */
+@keyframes gentlePulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+/* Shimmer effect on text */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Float up and down */
+@keyframes floatUpDown {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(3deg); }
+}
+
+/* Spin slowly */
+@keyframes slowSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Twinkle for stars/sparkles */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Bloom/scale in for flowers */
+@keyframes bloom {
+  from { transform: scale(0) rotate(-30deg); opacity: 0; }
+  to { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Ornament swing */
+@keyframes swingOrnament {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(8deg); }
+}
+
+/* Wave scroll indicator */
+@keyframes scrollWave {
+  0%, 100% { transform: translateY(0px) scaleX(1); }
+  50% { transform: translateY(12px) scaleX(0.85); }
+}
+
+/* Fade scale in */
+@keyframes fadeScaleIn {
+  from { opacity: 0; transform: scale(0.92) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0px); }
+}
+
+/* Border shimmer */
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(201, 150, 42, 0.3); box-shadow: 0 0 10px rgba(201, 150, 42, 0.2); }
+  50% { border-color: rgba(201, 150, 42, 0.9); box-shadow: 0 0 30px rgba(201, 150, 42, 0.5); }
+}
+
+/* ============================================
+   UTILITY ANIMATION CLASSES
+   ============================================ */
+
+.animate-petal-fall {
+  animation: petalFall linear infinite;
+}
+
+.animate-float {
+  animation: floatUpDown 4s ease-in-out infinite;
+}
+
+.animate-slow-spin {
+  animation: slowSpin 20s linear infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+.animate-bloom {
+  animation: bloom 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-gentle-pulse {
+  animation: gentlePulse 3s ease-in-out infinite;
+}
+
+.animate-swing {
+  animation: swingOrnament 3s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.animate-scroll-wave {
+  animation: scrollWave 2s ease-in-out infinite;
+}
+
+.animate-fade-scale-in {
+  animation: fadeScaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-border-glow {
+  animation: borderGlow 2.5s ease-in-out infinite;
+}
+
+/* Shimmer text */
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-w-gold) 0%,
+    var(--color-w-gold-light) 30%,
+    #fff5cc 50%,
+    var(--color-w-gold-light) 70%,
+    var(--color-w-gold) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ============================================
+   DECORATIVE ELEMENTS
+   ============================================ */
+
+/* Ornamental divider line */
+.ornament-line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ornament-line::before,
+.ornament-line::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-w-gold), transparent);
+}
+
+/* Section floral divider */
+.floral-divider {
+  position: relative;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.floral-divider::before {
+  content: '❧';
+  color: var(--color-w-gold);
+  font-size: 1.5rem;
+}
+
+/* Card glow effect */
+.card-glow {
+  box-shadow:
+    0 4px 20px rgba(201, 150, 42, 0.12),
+    0 20px 60px rgba(26, 58, 47, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.card-glow:hover {
+  box-shadow:
+    0 8px 40px rgba(201, 150, 42, 0.25),
+    0 30px 80px rgba(26, 58, 47, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: box-shadow 0.4s ease;
+}
+
+/* Glass morphism */
+.glass-card {
+  background: rgba(253, 248, 240, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(201, 150, 42, 0.2);
+}
+
+/* ============================================
+   PETAL RAIN OVERLAY
+   ============================================ */
+
+.petal {
+  position: fixed;
+  pointer-events: none;
+  user-select: none;
+  font-size: 1.2rem;
+  z-index: 9999;
+  will-change: transform, opacity;
+}
+
+/* ============================================
+   BACKGROUND PATTERNS
+   ============================================ */
+
+.pattern-arabesque {
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(201,150,42,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(107,175,138,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 90%, rgba(201,99,107,0.04) 0%, transparent 60%);
+}
+
+/* ============================================
+   RESPONSIVE HELPERS
+   ============================================ */
+
+@media (max-width: 640px) {
+  .mobile-text-center {
+    text-align: center !important;
+  }
+  
+  .mobile-full {
+    width: 100% !important;
+  }
+}
+
+/* ============================================
+   SCROLL & TRANSITION
+   ============================================ */
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* smooth scroll fade masks */
+.scroll-mask {
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+/* ============================================
+   FORM STYLES
+   ============================================ */
+
+.form-input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: rgba(253,252,247,0.9);
+  border: 1.5px solid rgba(201,150,42,0.2);
+  border-radius: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-w-emerald);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-input:focus {
+  border-color: var(--color-w-gold);
+  box-shadow: 0 0 0 3px rgba(201,150,42,0.12);
+}
+
+.form-input::placeholder {
+  color: rgba(26, 58, 47, 0.4);
+}
