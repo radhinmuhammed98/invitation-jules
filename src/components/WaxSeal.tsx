@@ -297,24 +297,47 @@ export function WaxSeal({ onOpen, isOpen }: WaxSealProps) {
                   />
 
                   {/* Monogram */}
-                  width: 36,
-                  height: 1,
-                  background:
-                  'linear-gradient(90deg, transparent, rgba(201,150,42,0.7), transparent)',
+                  <div className="relative z-10 flex flex-col items-center select-none">
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.18em', lineHeight: 1 }}>
+                      {['A', 'F'].map((letter, i) => (
+                        <span
+                          key={letter}
+                          style={{
+                            fontFamily: '"Cinzel", serif',
+                            fontSize: i === 0 ? '2rem' : '1.65rem',
+                            fontWeight: 700,
+                            letterSpacing: '0.02em',
+                            background: 'linear-gradient(180deg, #FFF5CC 0%, #E8C96D 40%, #C9962A 100%)',
+                            WebkitBackgroundClip: 'text',
+                            backgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                          }}
+                        >
+                          {letter}
+                        </span>
+                      ))}
+                    </div>
+                    <div
+                      className="mt-1"
+                      style={{
+                        width: 38,
+                        height: 1,
+                        background: 'linear-gradient(90deg, transparent, rgba(201,150,42,0.75), transparent)',
                       }}
                     />
-                  <span
-                    style={{
-                      fontFamily: '"Lato", sans-serif',
-                      fontSize: '0.48rem',
-                      letterSpacing: '0.25em',
-                      textTransform: 'uppercase',
-                      color: 'rgba(232,201,109,0.7)',
-                      marginTop: 3,
-                    }}
-                  >
-                    2026
-                  </span>
+                    <span
+                      style={{
+                        fontFamily: '"Cinzel", serif',
+                        fontSize: '0.42rem',
+                        letterSpacing: '0.35em',
+                        textTransform: 'uppercase',
+                        color: 'rgba(232,201,109,0.65)',
+                        marginTop: 3,
+                      }}
+                    >
+                      2026
+                    </span>
+                  </div>
                 </div>
 
                 {/* Radial crack lines that appear just as seal breaks */}
@@ -342,66 +365,64 @@ export function WaxSeal({ onOpen, isOpen }: WaxSealProps) {
                     />
                   ))}
                 </motion.div>
+              </motion.div>
             </div>
+
+            {/* Title block */}
+            <motion.div
+              animate={isRevealed ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <p
+                className="text-2xl sm:text-3xl mb-1"
+                style={{ color: 'rgba(232,201,109,0.75)' }}
+              >
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+              </p>
+
+              <h1
+                className="mb-2 leading-tight"
+                style={{
+                  fontFamily: '"Great Vibes", cursive',
+                  fontSize: 'clamp(2.2rem, 7vw, 3.8rem)',
+                  color: '#E8C96D',
+                }}
+              >
+                Wedding Invitation
+              </h1>
+
+              <p
+                style={{
+                  fontFamily: '"Cinzel", serif',
+                  fontSize: '0.8rem',
+                  letterSpacing: '0.18em',
+                  color: 'rgba(253,248,240,0.6)',
+                  textTransform: 'uppercase',
+                  marginBottom: '1rem',
+                }}
+              >
+                Althaf Hameed &amp; Fathima
+              </p>
+
+              {/* Tap prompt */}
+              <motion.p
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                style={{
+                  fontFamily: '"Lato", sans-serif',
+                  fontSize: '0.65rem',
+                  letterSpacing: '0.45em',
+                  textTransform: 'uppercase',
+                  color: 'rgba(201,150,42,0.65)',
+                  marginTop: '0.5rem',
+                }}
+              >
+                ✦ &nbsp; Tap the Seal to Open &nbsp; ✦
+              </motion.p>
+            </motion.div>
+          </div>
         </motion.div>
-            </div>
-
-            {/* Title block */ }
-  <motion.div
-    animate={isRevealed ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
-    transition={{ duration: 0.3 }}
-  >
-    <p
-      className="text-2xl sm:text-3xl mb-1"
-      style={{ color: 'rgba(232,201,109,0.75)' }}
-    >
-      بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-    </p>
-
-    <h1
-      className="mb-2 leading-tight"
-      style={{
-        fontFamily: '"Great Vibes", cursive',
-        fontSize: 'clamp(2.2rem, 7vw, 3.8rem)',
-        color: '#E8C96D',
-      }}
-    >
-      Wedding Invitation
-    </h1>
-
-    <p
-      style={{
-        fontFamily: '"Cinzel", serif',
-        fontSize: '0.8rem',
-        letterSpacing: '0.18em',
-        color: 'rgba(253,248,240,0.6)',
-        textTransform: 'uppercase',
-        marginBottom: '1rem',
-      }}
-    >
-      Althaf Hameed &amp; Fathima
-    </p>
-
-    {/* Tap prompt */}
-    <motion.p
-      animate={{ opacity: [0.5, 1, 0.5] }}
-      transition={{ duration: 2, repeat: Infinity }}
-      style={{
-        fontFamily: '"Lato", sans-serif',
-        fontSize: '0.65rem',
-        letterSpacing: '0.45em',
-        textTransform: 'uppercase',
-        color: 'rgba(201,150,42,0.65)',
-        marginTop: '0.5rem',
-      }}
-    >
-      ✦ &nbsp; Tap the Seal to Open &nbsp; ✦
-    </motion.p>
-  </motion.div>
-          </div >
-        </motion.div >
-      )
-}
-    </AnimatePresence >
+      )}
+    </AnimatePresence>
   );
 }
