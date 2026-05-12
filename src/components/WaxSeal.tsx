@@ -250,17 +250,17 @@ export function WaxSeal({ onOpen, isOpen }: WaxSealProps) {
                 animate={
                   sealBroken
                     ? {
-                        scale: 5.5,
-                        opacity: 0,
-                        rotate: 15,
-                        filter: 'drop-shadow(0 0 0px rgba(0,0,0,0))',
-                      }
+                      scale: 5.5,
+                      opacity: 0,
+                      rotate: 15,
+                      filter: 'drop-shadow(0 0 0px rgba(0,0,0,0))',
+                    }
                     : {
-                        scale: 1,
-                        opacity: 1,
-                        rotate: 3,
-                        filter: 'drop-shadow(0 12px 24px rgba(0,0,0,0.5))',
-                      }
+                      scale: 1,
+                      opacity: 1,
+                      rotate: 3,
+                      filter: 'drop-shadow(0 12px 24px rgba(0,0,0,0.5))',
+                    }
                 }
                 transition={
                   sealBroken
@@ -297,131 +297,111 @@ export function WaxSeal({ onOpen, isOpen }: WaxSealProps) {
                   />
 
                   {/* Monogram */}
-                  <div className="relative z-10 flex flex-col items-center select-none">
-                    <span
-                      style={{
-                        fontFamily: '"Great Vibes", cursive',
-                        fontSize: '2.4rem',
-                        lineHeight: 1,
-                        background:
-                          'linear-gradient(135deg, #C9962A 0%, #E8C96D 50%, #C9962A 100%)',
-                        backgroundSize: '200% auto',
-                        WebkitBackgroundClip: 'text',
-                        backgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        animation: 'shimmer 4s linear infinite',
-                        textTransform: 'uppercase',
-                      }}
-                    >
-                      A & F
-                    </span>
-                    <div
-                      className="mt-0.5"
-                      style={{
-                        width: 36,
-                        height: 1,
-                        background:
-                          'linear-gradient(90deg, transparent, rgba(201,150,42,0.7), transparent)',
+                  width: 36,
+                  height: 1,
+                  background:
+                  'linear-gradient(90deg, transparent, rgba(201,150,42,0.7), transparent)',
                       }}
                     />
-                    <span
-                      style={{
-                        fontFamily: '"Lato", sans-serif',
-                        fontSize: '0.48rem',
-                        letterSpacing: '0.25em',
-                        textTransform: 'uppercase',
-                        color: 'rgba(232,201,109,0.7)',
-                        marginTop: 3,
-                      }}
-                    >
-                      2026
-                    </span>
-                  </div>
-
-                  {/* Radial crack lines that appear just as seal breaks */}
-                  <motion.div
-                    className="absolute inset-0 rounded-full pointer-events-none"
-                    initial={{ opacity: 0 }}
-                    animate={sealBroken ? { opacity: 1 } : { opacity: 0 }}
-                    transition={{ duration: 0.05 }}
+                  <span
+                    style={{
+                      fontFamily: '"Lato", sans-serif',
+                      fontSize: '0.48rem',
+                      letterSpacing: '0.25em',
+                      textTransform: 'uppercase',
+                      color: 'rgba(232,201,109,0.7)',
+                      marginTop: 3,
+                    }}
                   >
-                    {[0, 45, 90, 135].map((angle) => (
-                      <div
-                        key={angle}
-                        className="absolute"
-                        style={{
-                          top: '50%',
-                          left: '50%',
-                          width: 90,
-                          height: 1,
-                          background:
-                            'linear-gradient(90deg, rgba(201,150,42,0.8), transparent)',
-                          transformOrigin: '0 50%',
-                          transform: `rotate(${angle}deg)`,
-                          marginTop: -0.5,
-                        }}
-                      />
-                    ))}
-                  </motion.div>
+                    2026
+                  </span>
                 </div>
-              </motion.div>
+
+                {/* Radial crack lines that appear just as seal breaks */}
+                <motion.div
+                  className="absolute inset-0 rounded-full pointer-events-none"
+                  initial={{ opacity: 0 }}
+                  animate={sealBroken ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ duration: 0.05 }}
+                >
+                  {[0, 45, 90, 135].map((angle) => (
+                    <div
+                      key={angle}
+                      className="absolute"
+                      style={{
+                        top: '50%',
+                        left: '50%',
+                        width: 90,
+                        height: 1,
+                        background:
+                          'linear-gradient(90deg, rgba(201,150,42,0.8), transparent)',
+                        transformOrigin: '0 50%',
+                        transform: `rotate(${angle}deg)`,
+                        marginTop: -0.5,
+                      }}
+                    />
+                  ))}
+                </motion.div>
+            </div>
+        </motion.div>
             </div>
 
-            {/* Title block */}
-            <motion.div
-              animate={isRevealed ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <p
-                className="text-2xl sm:text-3xl mb-1"
-                style={{ color: 'rgba(232,201,109,0.75)' }}
-              >
-                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-              </p>
+            {/* Title block */ }
+  <motion.div
+    animate={isRevealed ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
+    transition={{ duration: 0.3 }}
+  >
+    <p
+      className="text-2xl sm:text-3xl mb-1"
+      style={{ color: 'rgba(232,201,109,0.75)' }}
+    >
+      بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+    </p>
 
-              <h1
-                className="mb-2 leading-tight"
-                style={{
-                  fontFamily: '"Great Vibes", cursive',
-                  fontSize: 'clamp(2.2rem, 7vw, 3.8rem)',
-                  color: '#E8C96D',
-                }}
-              >
-                Wedding Invitation
-              </h1>
+    <h1
+      className="mb-2 leading-tight"
+      style={{
+        fontFamily: '"Great Vibes", cursive',
+        fontSize: 'clamp(2.2rem, 7vw, 3.8rem)',
+        color: '#E8C96D',
+      }}
+    >
+      Wedding Invitation
+    </h1>
 
-              <p
-                style={{
-                  fontFamily: '"Cinzel", serif',
-                  fontSize: '0.8rem',
-                  letterSpacing: '0.18em',
-                  color: 'rgba(253,248,240,0.6)',
-                  textTransform: 'uppercase',
-                  marginBottom: '1rem',
-                }}
-              >
-                Althaf Hameed &amp; Fathima
-              </p>
+    <p
+      style={{
+        fontFamily: '"Cinzel", serif',
+        fontSize: '0.8rem',
+        letterSpacing: '0.18em',
+        color: 'rgba(253,248,240,0.6)',
+        textTransform: 'uppercase',
+        marginBottom: '1rem',
+      }}
+    >
+      Althaf Hameed &amp; Fathima
+    </p>
 
-              {/* Tap prompt */}
-              <motion.p
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                style={{
-                  fontFamily: '"Lato", sans-serif',
-                  fontSize: '0.65rem',
-                  letterSpacing: '0.45em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(201,150,42,0.65)',
-                  marginTop: '0.5rem',
-                }}
-              >
-                ✦ &nbsp; Tap the Seal to Open &nbsp; ✦
-              </motion.p>
-            </motion.div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    {/* Tap prompt */}
+    <motion.p
+      animate={{ opacity: [0.5, 1, 0.5] }}
+      transition={{ duration: 2, repeat: Infinity }}
+      style={{
+        fontFamily: '"Lato", sans-serif',
+        fontSize: '0.65rem',
+        letterSpacing: '0.45em',
+        textTransform: 'uppercase',
+        color: 'rgba(201,150,42,0.65)',
+        marginTop: '0.5rem',
+      }}
+    >
+      ✦ &nbsp; Tap the Seal to Open &nbsp; ✦
+    </motion.p>
+  </motion.div>
+          </div >
+        </motion.div >
+      )
+}
+    </AnimatePresence >
   );
 }
