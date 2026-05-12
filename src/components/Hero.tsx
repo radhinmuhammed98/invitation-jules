@@ -217,8 +217,10 @@ export function Hero() {
           <h1
             className="leading-[1.1] sm:leading-tight"
             style={{
-              fontFamily: '"Great Vibes", cursive',
-              fontSize: 'clamp(3.5rem, 12vw, 7.5rem)',
+              fontFamily: '"Cormorant Garamond", serif',
+              fontStyle: 'italic',
+              fontWeight: 700,
+              fontSize: 'clamp(3.2rem, 11vw, 7rem)',
               background: 'linear-gradient(135deg, #C9962A 0%, #E8C96D 40%, #FFF5CC 55%, #E8C96D 70%, #C9962A 100%)',
               backgroundSize: '200% auto',
               WebkitBackgroundClip: 'text',
@@ -232,6 +234,7 @@ export function Hero() {
             <span
               style={{
                 fontFamily: '"Cinzel", serif',
+                fontStyle: 'normal',
                 fontSize: 'clamp(1rem, 4vw, 2.5rem)',
                 background: 'linear-gradient(135deg, rgba(201,150,42,0.8), rgba(232,201,109,0.9))',
                 WebkitBackgroundClip: 'text',
