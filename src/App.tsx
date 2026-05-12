@@ -193,7 +193,7 @@ export default function App() {
       <audio
         ref={audioRef}
         loop
-        src="https://archive.org/download/mixvocalonlynasheeds/%27The%20Wedding%20Nasheed%27%20Official%20Video%20-%20Omar%20Esa%20%28%401omaresa%29.mp3"
+        src="/wedding_nasheed.mp3"
       />
 
       {/* ── INTRO SEAL ─────────────────────────────────────────────────── */}
