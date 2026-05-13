@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { useCountdown } from '../hooks/useCountdown';
 import { WEDDING_DATA } from '../constants';
 
@@ -37,7 +37,7 @@ function CountdownUnit({ value, label }: CountdownUnitProps) {
 }
 
 // Animated falling petal component
-function FallingPetal({ emoji, left, delay, duration }: { emoji: string; left: string; delay: number; duration: number }) {
+const FallingPetal: React.FC<{ emoji: string; left: string; delay: number; duration: number }> = ({ emoji, left, delay, duration }) => {
   return (
     <motion.div
       className="absolute text-lg pointer-events-none select-none"
@@ -121,7 +121,7 @@ export function Hero() {
 
       {/* === FALLING PETALS === */}
       {petalsConfig.map((p, i) => (
-        <FallingPetal key={i} {...p} />
+        <FallingPetal key={i} emoji={p.emoji} left={p.left} delay={p.delay} duration={p.duration} />
       ))}
 
       {/* === HERO CONTENT === */}
