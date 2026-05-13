@@ -202,25 +202,31 @@ export default function App() {
       {/* ── GLOBAL OVERLAYS (always mounted after open) ───────────────── */}
       {isOpen && <GlobalPetalRain />}
       {isOpen && <MusicToggle audioRef={audioRef} playing={isPlaying} setPlaying={setIsPlaying} />}
-      {isOpen && <WhatsAppButton />}
 
       {/* ── MAIN CONTENT ────────────────────────────────────────────────── */}
       <AnimatePresence>
         {isOpen && (
           <motion.main
             key="main-content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
           >
 
             {/* HERO */}
             <Hero />
 
+            {/* ── GRADIENT BRIDGE: dark hero → light invitation ──────── */}
+            <div style={{
+              height: '180px',
+              background: 'linear-gradient(180deg, #081810 0%, #0f2318 25%, #1a2e1a 55%, #e8dfc8 100%)',
+              marginTop: '-2px',
+            }} />
+
             {/* ── INVITATION INTRO ─────────────────────────────────────── */}
             <section
               className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden"
-              style={{ background: 'linear-gradient(180deg, #FDF8F0 0%, #F7EDD8 50%, #FDF8F0 100%)' }}
+              style={{ background: 'linear-gradient(180deg, #e8dfc8 0%, #F7EDD8 20%, #FDF8F0 60%, #F7EDD8 100%)' }}
             >
               {/* Background floating petals */}
               {['🌸', '✿', '🌺', '❀'].map((e, i) => (
@@ -402,10 +408,13 @@ export default function App() {
             {/* ── PHOTO GALLERY ─────────────────────────────────────────── */}
             <PhotoGallery />
 
+            {/* ── BRIDGE: light gallery → dark venue ── */}
+            <div style={{ height: '160px', background: 'linear-gradient(180deg, #F7EDD8 0%, #c8d8c0 30%, #3a6b52 65%, #1A3A2F 100%)', marginTop: '-2px' }} />
+
             {/* ── VENUE SECTION ─────────────────────────────────────────── */}
             <section
               className="py-16 sm:py-24 px-4 sm:px-6 text-center"
-              style={{ background: 'linear-gradient(135deg, #1A3A2F 0%, #0D2218 100%)' }}
+              style={{ background: 'linear-gradient(180deg, #1A3A2F 0%, #0D2218 60%, #071510 100%)' }}
             >
               <div className="max-w-4xl mx-auto">
                 <SectionEntry>
@@ -481,10 +490,13 @@ export default function App() {
               </div>
             </section>
 
+            {/* ── BRIDGE: dark venue → light hosts ── */}
+            <div style={{ height: '160px', background: 'linear-gradient(180deg, #071510 0%, #0f2318 30%, #3a6b52 65%, #e8dfc8 100%)' }} />
+
             {/* ── HOSTS SECTION ─────────────────────────────────────────── */}
             <section
               className="py-16 sm:py-24 px-4 sm:px-6"
-              style={{ background: 'linear-gradient(180deg, #FDF8F0 0%, #F7EDD8 50%, #FDF8F0 100%)' }}
+              style={{ background: 'linear-gradient(180deg, #e8dfc8 0%, #F7EDD8 15%, #FDF8F0 50%, #F7EDD8 100%)' }}
             >
               <div className="max-w-3xl mx-auto text-center">
                 <SectionEntry>
@@ -566,13 +578,16 @@ export default function App() {
               </div>
             </section>
 
+            {/* ── BRIDGE: light hosts → dark RSVP ── */}
+            <div style={{ height: '160px', background: 'linear-gradient(180deg, #F7EDD8 0%, #c8d8c0 30%, #3a6b52 65%, #0D2218 100%)', marginTop: '-2px' }} />
+
             {/* ── RSVP ──────────────────────────────────────────────────── */}
             <RSVPSection />
 
             {/* ── FOOTER ────────────────────────────────────────────────── */}
             <footer
               className="py-14 sm:py-20 text-center relative overflow-hidden"
-              style={{ background: 'linear-gradient(135deg, #0D2218 0%, #1A3A2F 100%)' }}
+              style={{ background: 'linear-gradient(180deg, #071510 0%, #0D2218 40%, #1A3A2F 100%)' }}
             >
               {/* Floating stars */}
               {[...Array(10)].map((_, i) => (

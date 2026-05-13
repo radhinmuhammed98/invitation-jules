@@ -115,6 +115,15 @@ export function Hero() {
         />
       </motion.div>
 
+      {/* Bottom fade — hero bleeds into gradient bridge below */}
+      <div
+        className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none"
+        style={{
+          height: '220px',
+          background: 'linear-gradient(to bottom, transparent 0%, rgba(8,24,16,0.6) 60%, #081810 100%)',
+        }}
+      />
+
       {/* === FALLING PETALS === */}
       {petalsConfig.map((p, i) => (
         <FallingPetal key={i} {...p} />
