@@ -662,11 +662,23 @@ export default function App() {
                   Surabhi Auditorium, Perambra
                 </p>
                 <p
-                  className="text-xs"
+                  className="text-xs mb-8"
                   style={{ color: 'rgba(253,248,240,0.2)', fontFamily: '"Lato", sans-serif', letterSpacing: '0.15em' }}
                 >
                   #AlthafFathimaWedding2026
                 </p>
+
+                {/* Webloomic Watermark */}
+                <div
+                  className="absolute bottom-4 left-0 right-0 text-center pointer-events-none"
+                >
+                  <p
+                    className="text-[10px] uppercase tracking-[0.2em]"
+                    style={{ color: 'rgba(201,150,42,0.3)', fontFamily: '"Lato", sans-serif' }}
+                  >
+                    Crafted with elegance by <strong style={{ color: 'rgba(201,150,42,0.5)', fontWeight: 600 }}>Webloomic</strong>
+                  </p>
+                </div>
               </motion.div>
             </footer>
 

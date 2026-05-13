@@ -44,8 +44,8 @@ export const WEDDING_DATA = {
   },
 
   couple_photos: [
-    "/WhatsApp Image 2026-05-12 at 9.47.35 PM.jpeg",
-    "/WhatsApp Image 2026-05-12 at 9.47.35 PM(1).jpeg",
-    "/WhatsApp Image 2026-05-12 at 9.47.36 PM.jpeg"
+    "/photo_collage.jpg",
+    "/photo_agra.jpg",
+    "/photo_casual.jpg"
   ]
 };
