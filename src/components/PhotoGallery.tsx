@@ -21,6 +21,12 @@ const PHOTOS = [
     sub: 'Every ordinary day, extraordinary together',
     role: 'portrait',
   },
+  {
+    src: '/old-photo.jpeg',
+    caption: 'Timeless Love',
+    sub: 'A moment captured, a memory kept forever',
+    role: 'portrait',
+  },
 ];
 
 // ── Lightbox ──────────────────────────────────────────────────────────────────
@@ -182,87 +188,21 @@ export function PhotoGallery() {
             </p>
           </motion.div>
 
-          {/* ── COLLAGE HERO ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 60, scale: 0.95 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
-            viewport={{ once: true }}
-            whileHover={{ y: -4 }}
-            onClick={() => open(0)}
-            className="relative cursor-pointer mb-10 sm:mb-16 group"
-          >
-            <div className="relative rounded-[2rem] overflow-hidden bg-white/50 p-2 glass-card">
-              <div className="relative rounded-3xl overflow-hidden shadow-sm">
-                <img
-                  src="/photo_collage.jpg"
-                  alt="Our Journey — Photo Collage"
-                  className="w-full object-cover transition-transform duration-[2500ms] ease-out group-hover:scale-[1.02]"
-                  style={{ maxHeight: '75vh', objectPosition: 'center top' }}
-                />
-
-                {/* Bottom subtle gradient */}
-                <div className="absolute inset-0 pointer-events-none" style={{
-                  background: 'linear-gradient(0deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 30%, transparent 60%)',
-                }} />
-
-                {/* Zoom hint */}
-                <div className="absolute top-5 right-5 z-20 w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-md bg-white/20"
-                  style={{ border: '1px solid rgba(255,255,255,0.4)', color: '#fff' }}>
-                  <ZoomIn size={16} />
-                </div>
-
-                {/* Bottom caption */}
-                <div className="absolute bottom-0 left-0 right-0 z-20 p-6 sm:p-10">
-                  <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7, duration: 0.9 }}
-                    viewport={{ once: true }}
-                    style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(2rem, 5.5vw, 4rem)', color: '#fff', textShadow: '0 2px 12px rgba(0,0,0,0.3)' }}
-                  >
-                    Our Story in Frames
-                  </motion.p>
-                  <p className="mt-1 text-[10px] uppercase tracking-[0.22em] font-semibold" style={{ color: 'rgba(255,255,255,0.8)', fontFamily: 'var(--font-sans)' }}>
-                    A collection of beautiful memories together
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* ── SECTION DIVIDER ── */}
-          <motion.div
-            initial={{ opacity: 0, scaleX: 0.5 }}
-            whileInView={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.9, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="flex items-center justify-center gap-5 mb-10 sm:mb-16"
-          >
-            <div className="h-px flex-1 max-w-xs" style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.3))' }} />
-            <span className="text-[10px] uppercase tracking-[0.45em] font-semibold" style={{ color: 'rgba(212,175,55,0.8)', fontFamily: 'var(--font-sans)' }}>
-              Cherished Moments
-            </span>
-            <div className="h-px flex-1 max-w-xs" style={{ background: 'linear-gradient(90deg, rgba(212,175,55,0.3), transparent)' }} />
-          </motion.div>
-
-          {/* ── PORTRAIT DUO ── */}
+          {/* ── PHOTO GRID (4 Photos) ── */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
-            {[PHOTOS[1], PHOTOS[2]].map((photo, i) => (
+            {PHOTOS.map((photo, i) => (
               <motion.div
                 key={photo.src}
                 initial={{ opacity: 0, y: 30, scale: 0.97 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{ duration: 0.8, delay: i * 0.15, ease: [0.34, 1.56, 0.64, 1] }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-50px" }}
                 whileHover={{ y: -4 }}
-                onClick={() => open(i + 1)}
-                className="relative cursor-pointer group"
+                onClick={() => open(i)}
+                className={`relative cursor-pointer group ${i === 0 ? 'sm:col-span-2' : ''}`}
               >
                 <div className="glass-card p-2 rounded-[2rem]">
-                  <div className="relative rounded-3xl overflow-hidden bg-white/50" style={{
-                    aspectRatio: '3/4',
-                  }}>
+                  <div className={`relative rounded-3xl overflow-hidden bg-white/50 ${i === 0 ? 'aspect-video' : 'aspect-[3/4]'}`}>
                     <img
                       src={photo.src}
                       alt={photo.caption}
