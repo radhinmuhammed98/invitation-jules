@@ -88,29 +88,34 @@ export function Hero() {
     <section
       ref={containerRef}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
-      style={{ minHeight: '100svh' }}
+      style={{ minHeight: '100svh', background: 'var(--color-w-cream)' }}
     >
-      {/* === HERO BACKGROUND IMAGE === */}
+      {/* === DECORATED HERO BACKGROUND === */}
       <motion.div style={{ y }} className="absolute inset-0 z-0">
+        {/* Soft radial gradient base */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_center,_#FCFAF8_0%,_#F5EFE6_50%,_#EBE1D0_100%)]" />
+        
+        {/* Intricate SVG Pattern Overlay */}
         <div
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 opacity-[0.06]"
           style={{
-            backgroundImage: 'url("/old-photo.jpeg")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center 20%',
-            backgroundRepeat: 'no-repeat',
-            // A subtle overall overlay to ensure text is readable if the photo is very bright or dark
-            boxShadow: 'inset 0 0 0 2000px rgba(0,0,0,0.15)'
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 C60 20 80 40 100 50 C80 60 60 80 50 100 C40 80 20 60 0 50 C20 40 40 20 50 0 Z' fill='%23D4AF37'/%3E%3Ccircle cx='50' cy='50' r='10' fill='none' stroke='%23D4AF37' stroke-width='1'/%3E%3C/svg%3E")`,
+            backgroundSize: '80px 80px',
+            backgroundPosition: 'center',
           }}
         />
+
+        {/* Elegant Gold Accents (Gradients) */}
+        <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full blur-[120px] bg-[rgba(212,175,55,0.15)] pointer-events-none" />
+        <div className="absolute top-[40%] -right-[10%] w-[40%] h-[60%] rounded-full blur-[100px] bg-[rgba(212,175,55,0.1)] pointer-events-none" />
       </motion.div>
 
-      {/* Fade-to-cream at the bottom */}
+      {/* Fade-to-cream at the bottom for seamless blending */}
       <div
         className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none"
         style={{
-          height: '40vh',
-          background: 'linear-gradient(to bottom, transparent 0%, rgba(252,250,248,0.6) 60%, var(--color-w-cream) 100%)',
+          height: '30vh',
+          background: 'linear-gradient(to bottom, transparent 0%, var(--color-w-cream) 100%)',
         }}
       />
 
@@ -139,16 +144,23 @@ export function Hero() {
           viewport={{ once: true }}
           className="relative mb-8 sm:mb-12 mt-12"
         >
+          {/* Top Decorative Arch SVG inside Hero text block */}
+          <div className="flex justify-center mb-8 opacity-60">
+            <svg width="120" height="40" viewBox="0 0 120 40" fill="none" stroke="var(--color-w-gold)" strokeWidth="1.5">
+              <path d="M 10 30 Q 60 -10 110 30" />
+              <circle cx="60" cy="15" r="3" fill="var(--color-w-gold)" />
+            </svg>
+          </div>
+
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1 }}
             className="text-xl sm:text-2xl mb-6"
             style={{
-              color: '#fff',
+              color: 'var(--color-w-gold)',
               fontFamily: '"Amiri", serif',
               fontWeight: 700,
-              textShadow: '0 2px 12px rgba(0,0,0,0.4)'
             }}
           >
             بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
@@ -160,8 +172,7 @@ export function Hero() {
               fontFamily: 'var(--font-script)',
               fontWeight: 400,
               fontSize: 'clamp(3.5rem, 12vw, 8rem)',
-              color: '#fff',
-              textShadow: '0 4px 20px rgba(0,0,0,0.3)',
+              color: 'var(--color-w-emerald)',
             }}
           >
             Althaf
@@ -169,12 +180,11 @@ export function Hero() {
             <span
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(1rem, 4vw, 2.5rem)',
+                fontSize: 'clamp(1.5rem, 5vw, 3rem)',
                 color: 'var(--color-w-gold)',
-                letterSpacing: '0.4em',
+                letterSpacing: '0.2em',
                 display: 'inline-block',
-                margin: '0.1em 0',
-                textShadow: '0 2px 10px rgba(0,0,0,0.3)'
+                margin: '0.2em 0',
               }}
             >
               &amp;
@@ -192,10 +202,12 @@ export function Hero() {
           className="mb-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-[10vh]"
         >
           <div
-            className="px-8 py-3.5 rounded-full text-sm font-semibold tracking-widest glass-card"
+            className="px-8 py-3.5 rounded-full text-sm font-bold tracking-widest glass-card"
             style={{
               color: 'var(--color-w-emerald)',
               fontFamily: 'var(--font-sans)',
+              border: '1px solid rgba(212,175,55,0.4)',
+              boxShadow: '0 8px 30px rgba(212,175,55,0.15)'
             }}
           >
             14 . 06 . 2026
@@ -209,7 +221,8 @@ export function Hero() {
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <div className="w-[1px] h-12" style={{ background: 'linear-gradient(to bottom, var(--color-w-emerald-mid), transparent)' }} />
+        <span style={{ color: 'var(--color-w-gold)', fontSize: '0.7rem', letterSpacing: '0.3em', fontFamily: 'var(--font-sans)' }}>SCROLL</span>
+        <div className="w-[1px] h-10" style={{ background: 'linear-gradient(to bottom, var(--color-w-gold), transparent)' }} />
       </motion.div>
     </section>
   );

@@ -5,6 +5,7 @@ import { Hero } from './components/Hero';
 import { EventCard } from './components/EventCard';
 import { PhotoGallery } from './components/PhotoGallery';
 import { RSVPSection } from './components/RSVPSection';
+import { ScrollDecorations } from './components/ScrollDecorations';
 import { WEDDING_DATA } from './constants';
 import { WeddingWarning } from './components/WeddingWarning';
 import { Heart, MapPin, Music, VolumeX, MessageCircle } from 'lucide-react';
@@ -212,6 +213,8 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
           >
+            {/* Scroll Decorations */}
+            <ScrollDecorations />
 
             {/* HERO */}
             <Hero />

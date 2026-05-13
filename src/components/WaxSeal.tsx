@@ -196,13 +196,17 @@ export function WaxSeal({ onOpen, isOpen }: WaxSealProps) {
                     <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.15em' }}>
                       {['A', 'F'].map((letter, i) => (
                         <span key={letter} style={{
-                          fontFamily: 'var(--font-script)',
+                          fontFamily: '"Cinzel", serif',
                           fontSize: i === 0 ? '2.1rem' : '1.7rem',
-                          color: '#fff',
+                          fontWeight: 700,
+                          background: 'linear-gradient(180deg, #FFF5CC 0%, #E8C96D 40%, #C9962A 100%)',
+                          WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent',
                           textShadow: '0 2px 4px rgba(0,0,0,0.1)'
                         }}>{letter}</span>
                       ))}
                     </div>
+                    <div style={{ width: 40, height: 1, margin: '4px 0 3px', background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.8), transparent)' }} />
+                    <span style={{ fontFamily: '"Cinzel", serif', fontSize: '0.4rem', letterSpacing: '0.4em', color: 'rgba(212,175,55,0.8)', textTransform: 'uppercase', fontWeight: 600 }}>2026</span>
                   </div>
                 </div>
 
