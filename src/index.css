@@ -1,23 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Lato:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-serif: "Cormorant Garamond", serif;
-  --font-sans: "Lato", sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-script: "Great Vibes", cursive;
   --font-display: "Cinzel", serif;
 
-  --color-w-cream: #FDF8F0;
-  --color-w-gold: #C9962A;
-  --color-w-gold-light: #E8C96D;
-  --color-w-rose: #C9636B;
-  --color-w-rose-light: #F4D1D3;
-  --color-w-emerald: #1A3A2F;
-  --color-w-emerald-mid: #2D5E47;
-  --color-w-emerald-light: #6BAF8A;
-  --color-w-ivory: #FEFCF7;
-  --color-w-blush: #F7E8E8;
-  --color-w-mauve: #8B5E6E;
+  --color-w-cream: #FCFAF8;
+  --color-w-cream-dark: #F2EFEA;
+  --color-w-gold: #D4AF37;
+  --color-w-gold-light: #F3E5AB;
+  --color-w-rose: #D8A7A7;
+  --color-w-emerald: #1A1A1A;
+  --color-w-emerald-mid: #333333;
+  --color-w-champagne: #D4AF37;
+  --color-w-champagne-light: rgba(212, 175, 55, 0.15);
 }
 
 /* ============================================
@@ -272,10 +270,28 @@
 
 /* Glass morphism */
 .glass-card {
-  background: rgba(253, 248, 240, 0.65);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(201, 150, 42, 0.2);
+  background: rgba(252, 250, 248, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+  border-radius: 1.5rem;
+}
+
+.glass-button {
+  background: rgba(252, 250, 248, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  color: var(--color-w-emerald);
+  transition: all 0.3s ease;
+}
+
+.glass-button:hover {
+  background: rgba(252, 250, 248, 0.9);
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 /* ============================================

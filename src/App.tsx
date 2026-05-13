@@ -188,7 +188,7 @@ export default function App() {
   };
 
   return (
-    <div style={{ background: '#FDF8F0', minHeight: '100vh' }}>
+    <div style={{ background: 'var(--color-w-cream)', minHeight: '100vh', color: 'var(--color-w-emerald)' }}>
       {/* Hidden Audio Player for Nasheed */}
       <audio
         ref={audioRef}
@@ -216,17 +216,9 @@ export default function App() {
             {/* HERO */}
             <Hero />
 
-            {/* ── GRADIENT BRIDGE: dark hero → light invitation ──────── */}
-            <div style={{
-              height: '180px',
-              background: 'linear-gradient(180deg, #081810 0%, #0f2318 25%, #1a2e1a 55%, #e8dfc8 100%)',
-              marginTop: '-2px',
-            }} />
-
             {/* ── INVITATION INTRO ─────────────────────────────────────── */}
             <section
               className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden"
-              style={{ background: 'linear-gradient(180deg, #e8dfc8 0%, #F7EDD8 20%, #FDF8F0 60%, #F7EDD8 100%)' }}
             >
               {/* Background floating petals */}
               {['🌸', '✿', '🌺', '❀'].map((e, i) => (
@@ -251,13 +243,13 @@ export default function App() {
                 <SectionEntry>
                   <p
                     className="text-3xl sm:text-4xl mt-6 mb-2"
-                    style={{ color: 'rgba(201,150,42,0.8)' }}
+                    style={{ color: 'var(--color-w-gold)' }}
                   >
                     بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
                   </p>
                   <p
-                    className="text-xs uppercase tracking-[0.4em] mb-8 font-semibold"
-                    style={{ color: 'rgba(26,58,47,0.5)', fontFamily: '"Lato", sans-serif' }}
+                    className="text-[10px] sm:text-xs uppercase tracking-[0.4em] mb-8 font-semibold"
+                    style={{ color: 'rgba(26,26,26,0.4)', fontFamily: 'var(--font-sans)' }}
                   >
                     In the Name of Allah, the Most Gracious, the Most Merciful
                   </p>
@@ -267,7 +259,7 @@ export default function App() {
                 <SectionEntry>
                   <p
                     className="text-base sm:text-lg leading-relaxed italic mb-8"
-                    style={{ color: 'rgba(26,58,47,0.72)', fontFamily: '"Cormorant Garamond", serif' }}
+                    style={{ color: 'rgba(26,26,26,0.6)', fontFamily: 'var(--font-serif)' }}
                   >
                     With great joy and gratitude to the Almighty, we cordially invite you
                     and your family to attend the marriage ceremony of
@@ -277,31 +269,26 @@ export default function App() {
                 {/* Groom Details */}
                 <SectionEntry>
                   <div
-                    className="mb-6 p-5 sm:p-6 rounded-2xl relative"
-                    style={{
-                      background: 'rgba(26,58,47,0.04)',
-                      border: '1px solid rgba(26,58,47,0.12)',
-                      boxShadow: '0 8px 30px rgba(26,58,47,0.08)',
-                    }}
+                    className="mb-6 p-5 sm:p-6 rounded-[2rem] relative glass-card"
                   >
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-0.5 rounded-full text-xs font-bold uppercase tracking-widest"
-                      style={{ background: 'linear-gradient(135deg, #1A3A2F, #2D5E47)', color: '#E8C96D', fontFamily: '"Lato", sans-serif' }}>
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-0.5 rounded-full text-xs font-semibold uppercase tracking-widest"
+                      style={{ background: 'var(--color-w-champagne-light)', color: 'var(--color-w-champagne)', fontFamily: 'var(--font-sans)', border: '1px solid rgba(212,175,55,0.3)' }}>
                       Groom
                     </div>
                     <h3
                       className="mt-2 mb-1"
-                      style={{ fontFamily: '"Great Vibes", cursive', fontSize: 'clamp(2rem, 6vw, 3.5rem)', color: '#1A3A2F' }}
+                      style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(2rem, 6vw, 3.5rem)', color: 'var(--color-w-emerald)' }}
                     >
                       Althaf Hameed
                     </h3>
                     <p
                       className="text-sm sm:text-base italic"
-                      style={{ color: 'rgba(26,58,47,0.65)', fontFamily: '"Cormorant Garamond", serif' }}
+                      style={{ color: 'rgba(26,26,26,0.6)', fontFamily: 'var(--font-serif)' }}
                     >
                       Grandson of{' '}
-                      <strong style={{ color: '#1A3A2F' }}>Moideen N.M. &amp; Ayisha</strong>
+                      <strong style={{ color: 'var(--color-w-emerald)' }}>Moideen N.M. &amp; Ayisha</strong>
                       <br />
-                      and <strong style={{ color: '#1A3A2F' }}>Moideen &amp; Nabeesa</strong>
+                      and <strong style={{ color: 'var(--color-w-emerald)' }}>Moideen &amp; Nabeesa</strong>
                     </p>
                   </div>
                 </SectionEntry>
@@ -309,48 +296,43 @@ export default function App() {
                 {/* Divider between groom & bride */}
                 <SectionEntry>
                   <div className="flex items-center justify-center gap-3 my-4">
-                    <div className="h-px flex-1 max-w-24" style={{ background: 'linear-gradient(90deg, transparent, rgba(201,150,42,0.5))' }} />
+                    <div className="h-px flex-1 max-w-24" style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.4))' }} />
                     <motion.span
-                      animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                      style={{ color: '#C9636B', fontSize: '1.5rem' }}
+                      animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
+                      transition={{ duration: 4, repeat: Infinity }}
+                      style={{ color: 'var(--color-w-gold)', fontSize: '1.2rem' }}
                     >
-                      ❤
+                      ❧
                     </motion.span>
-                    <div className="h-px flex-1 max-w-24" style={{ background: 'linear-gradient(90deg, rgba(201,150,42,0.5), transparent)' }} />
+                    <div className="h-px flex-1 max-w-24" style={{ background: 'linear-gradient(90deg, rgba(212,175,55,0.4), transparent)' }} />
                   </div>
                 </SectionEntry>
 
                 {/* Bride Details */}
                 <SectionEntry>
                   <div
-                    className="mb-6 p-5 sm:p-6 rounded-2xl relative"
-                    style={{
-                      background: 'rgba(253,248,240,0.85)',
-                      border: '1px solid rgba(201,150,42,0.25)',
-                      boxShadow: '0 8px 30px rgba(201,150,42,0.1)',
-                    }}
+                    className="mb-6 p-5 sm:p-6 rounded-[2rem] relative glass-card"
                   >
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-0.5 rounded-full text-xs font-bold uppercase tracking-widest"
-                      style={{ background: 'linear-gradient(135deg, #C9962A, #E8C96D)', color: '#1A3A2F', fontFamily: '"Lato", sans-serif' }}>
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-0.5 rounded-full text-xs font-semibold uppercase tracking-widest"
+                      style={{ background: 'var(--color-w-champagne-light)', color: 'var(--color-w-champagne)', fontFamily: 'var(--font-sans)', border: '1px solid rgba(212,175,55,0.3)' }}>
                       Bride
                     </div>
                     <h3
                       className="mt-2 mb-1"
-                      style={{ fontFamily: '"Great Vibes", cursive', fontSize: 'clamp(2rem, 6vw, 3.5rem)', color: '#1A3A2F' }}
+                      style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(2rem, 6vw, 3.5rem)', color: 'var(--color-w-emerald)' }}
                     >
                       Fathima
                     </h3>
                     <p
                       className="text-sm sm:text-base italic"
-                      style={{ color: 'rgba(26,58,47,0.65)', fontFamily: '"Cormorant Garamond", serif' }}
+                      style={{ color: 'rgba(26,26,26,0.6)', fontFamily: 'var(--font-serif)' }}
                     >
-                      Daughter of <strong style={{ color: '#1A3A2F' }}>Nasir</strong> and{' '}
-                      <strong style={{ color: '#1A3A2F' }}>Shamsina</strong>
+                      Daughter of <strong style={{ color: 'var(--color-w-emerald)' }}>Nasir</strong> and{' '}
+                      <strong style={{ color: 'var(--color-w-emerald)' }}>Shamsina</strong>
                     </p>
                     <div
-                      className="inline-flex items-center gap-2 mt-2 px-3 py-1 rounded-full text-xs"
-                      style={{ background: 'rgba(201,150,42,0.1)', color: 'rgba(201,150,42,0.9)', fontFamily: '"Lato", sans-serif', letterSpacing: '0.1em' }}
+                      className="inline-flex items-center gap-2 mt-2 px-4 py-1.5 rounded-full text-[10px] uppercase tracking-widest font-semibold"
+                      style={{ background: 'rgba(212,175,55,0.1)', color: 'var(--color-w-gold)', fontFamily: 'var(--font-sans)' }}
                     >
                       🏠 Padikkalekkandi
                     </div>
@@ -367,26 +349,25 @@ export default function App() {
             {/* ── EVENTS SECTION ────────────────────────────────────────── */}
             <section
               className="py-16 sm:py-24 px-4 sm:px-6"
-              style={{ background: '#FDF8F0' }}
             >
               <SectionEntry className="text-center mb-12 sm:mb-16">
                 <p className="uppercase tracking-[0.5em] text-xs mb-3 font-semibold"
-                  style={{ color: 'rgba(201,150,42,0.8)', fontFamily: '"Lato", sans-serif' }}>
+                  style={{ color: 'var(--color-w-gold)', fontFamily: 'var(--font-sans)' }}>
                   ✦ &nbsp; Mark Your Calendar &nbsp; ✦
                 </p>
                 <h2
                   style={{
-                    fontFamily: '"Great Vibes", cursive',
+                    fontFamily: 'var(--font-script)',
                     fontSize: 'clamp(2.8rem, 8vw, 5rem)',
-                    color: '#1A3A2F',
+                    color: 'var(--color-w-emerald)',
                   }}
                 >
                   The Blessed Day
                 </h2>
                 <div className="flex items-center justify-center gap-3 mt-3">
-                  <div className="h-px w-20 sm:w-32" style={{ background: 'linear-gradient(90deg, transparent, rgba(201,150,42,0.5))' }} />
-                  <span style={{ color: 'rgba(201,150,42,0.7)', fontSize: '1.1rem' }}>❧</span>
-                  <div className="h-px w-20 sm:w-32" style={{ background: 'linear-gradient(90deg, rgba(201,150,42,0.5), transparent)' }} />
+                  <div className="h-px w-20 sm:w-32" style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.4))' }} />
+                  <span style={{ color: 'rgba(212,175,55,0.6)', fontSize: '1.1rem' }}>❧</span>
+                  <div className="h-px w-20 sm:w-32" style={{ background: 'linear-gradient(90deg, rgba(212,175,55,0.4), transparent)' }} />
                 </div>
               </SectionEntry>
 
@@ -400,7 +381,6 @@ export default function App() {
             {/* ── WARNING CARD ──────────────────────────────────────────── */}
             <section
               className="py-4 sm:py-6"
-              style={{ background: 'linear-gradient(180deg, #FDF8F0 0%, #FFF5F5 50%, #FDF8F0 100%)' }}
             >
               <WeddingWarning />
             </section>
@@ -408,33 +388,29 @@ export default function App() {
             {/* ── PHOTO GALLERY ─────────────────────────────────────────── */}
             <PhotoGallery />
 
-            {/* ── BRIDGE: light gallery → dark venue ── */}
-            <div style={{ height: '160px', background: 'linear-gradient(180deg, #F7EDD8 0%, #c8d8c0 30%, #3a6b52 65%, #1A3A2F 100%)', marginTop: '-2px' }} />
-
             {/* ── VENUE SECTION ─────────────────────────────────────────── */}
             <section
-              className="py-16 sm:py-24 px-4 sm:px-6 text-center"
-              style={{ background: 'linear-gradient(180deg, #1A3A2F 0%, #0D2218 60%, #071510 100%)' }}
+              className="py-16 sm:py-24 px-4 sm:px-6 text-center relative"
             >
+              <div className="absolute inset-0 bg-white/40 backdrop-blur-3xl -z-10" />
               <div className="max-w-4xl mx-auto">
                 <SectionEntry>
                   <p className="uppercase tracking-[0.5em] text-xs mb-3 font-semibold"
-                    style={{ color: 'rgba(201,150,42,0.8)', fontFamily: '"Lato", sans-serif' }}>
+                    style={{ color: 'var(--color-w-gold)', fontFamily: 'var(--font-sans)' }}>
                     ✦ &nbsp; Venue &nbsp; ✦
                   </p>
                   <h2
                     className="mb-6"
-                    style={{ fontFamily: '"Great Vibes", cursive', fontSize: 'clamp(2.8rem, 8vw, 5rem)', color: '#E8C96D' }}
+                    style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(2.8rem, 8vw, 5rem)', color: 'var(--color-w-emerald)' }}
                   >
                     Where We Celebrate
                   </h2>
 
                   {/* Venue card */}
                   <div
-                    className="rounded-3xl overflow-hidden mb-8 relative"
-                    style={{ border: '1px solid rgba(201,150,42,0.3)', boxShadow: '0 30px 80px rgba(0,0,0,0.4)' }}
+                    className="rounded-[2rem] overflow-hidden mb-8 relative glass-card p-2"
                   >
-                    <div className="relative h-48 sm:h-64 md:h-80">
+                    <div className="relative h-48 sm:h-64 md:h-80 rounded-[1.5rem] overflow-hidden shadow-sm">
                       <img
                         src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=1920"
                         alt="Surabhi Auditorium"
@@ -442,13 +418,13 @@ export default function App() {
                         referrerPolicy="no-referrer"
                       />
                       <div className="absolute inset-0"
-                        style={{ background: 'linear-gradient(0deg, rgba(13,34,24,0.8) 0%, rgba(13,34,24,0.2) 100%)' }}
+                        style={{ background: 'linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 100%)' }}
                       />
-                      <div className="absolute bottom-4 left-0 right-0 px-6">
-                        <p style={{ fontFamily: '"Cinzel", serif', color: '#E8C96D', fontSize: '1.3rem', letterSpacing: '0.1em' }}>
+                      <div className="absolute bottom-6 left-0 right-0 px-6">
+                        <p style={{ fontFamily: 'var(--font-sans)', fontWeight: 600, color: '#fff', fontSize: '1.3rem', letterSpacing: '0.1em' }}>
                           Surabhi Auditorium
                         </p>
-                        <p style={{ color: 'rgba(253,248,240,0.6)', fontSize: '0.9rem', fontFamily: '"Lato", sans-serif', letterSpacing: '0.1em' }}>
+                        <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.9rem', fontFamily: 'var(--font-sans)', letterSpacing: '0.1em' }}>
                           Perambra
                         </p>
                       </div>
@@ -457,14 +433,14 @@ export default function App() {
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <div
-                      className="flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm"
-                      style={{ border: '1px solid rgba(201,150,42,0.3)', color: 'rgba(232,201,109,0.9)', fontFamily: '"Cinzel", serif', letterSpacing: '0.08em' }}
+                      className="flex items-center justify-center gap-2 px-6 py-3 rounded-2xl text-sm glass-card"
+                      style={{ color: 'var(--color-w-emerald)', fontFamily: 'var(--font-sans)', fontWeight: 500 }}
                     >
                       📅 &nbsp; Sunday, 14 June 2026
                     </div>
                     <div
-                      className="flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm"
-                      style={{ border: '1px solid rgba(201,150,42,0.3)', color: 'rgba(232,201,109,0.9)', fontFamily: '"Cinzel", serif', letterSpacing: '0.08em' }}
+                      className="flex items-center justify-center gap-2 px-6 py-3 rounded-2xl text-sm glass-card"
+                      style={{ color: 'var(--color-w-emerald)', fontFamily: 'var(--font-sans)', fontWeight: 500 }}
                     >
                       🕒 &nbsp; 03:00 PM
                     </div>
@@ -474,14 +450,12 @@ export default function App() {
                     href={WEDDING_DATA.venue.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05, boxShadow: '0 15px 40px rgba(201,150,42,0.4)' }}
-                    whileTap={{ scale: 0.97 }}
-                    className="inline-flex items-center gap-2 mt-8 px-8 py-4 rounded-full font-bold uppercase tracking-widest text-sm transition-all"
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="inline-flex items-center gap-2 mt-8 px-8 py-4 rounded-full font-semibold uppercase tracking-widest text-sm transition-all glass-button"
                     style={{
-                      background: 'linear-gradient(135deg, #C9962A, #E8C96D)',
-                      color: '#1A3A2F',
-                      fontFamily: '"Lato", sans-serif',
-                      letterSpacing: '0.18em',
+                      fontFamily: 'var(--font-sans)',
+                      letterSpacing: '0.15em',
                     }}
                   >
                     <MapPin size={16} /> Get Directions
@@ -490,50 +464,41 @@ export default function App() {
               </div>
             </section>
 
-            {/* ── BRIDGE: dark venue → light hosts ── */}
-            <div style={{ height: '160px', background: 'linear-gradient(180deg, #071510 0%, #0f2318 30%, #3a6b52 65%, #e8dfc8 100%)' }} />
-
             {/* ── HOSTS SECTION ─────────────────────────────────────────── */}
             <section
               className="py-16 sm:py-24 px-4 sm:px-6"
-              style={{ background: 'linear-gradient(180deg, #e8dfc8 0%, #F7EDD8 15%, #FDF8F0 50%, #F7EDD8 100%)' }}
             >
               <div className="max-w-3xl mx-auto text-center">
                 <SectionEntry>
                   <FloralBorder />
                   <p className="uppercase tracking-[0.5em] text-xs mt-6 mb-3 font-semibold"
-                    style={{ color: 'rgba(201,150,42,0.8)', fontFamily: '"Lato", sans-serif' }}>
+                    style={{ color: 'var(--color-w-gold)', fontFamily: 'var(--font-sans)' }}>
                     ✦ &nbsp; With Love From &nbsp; ✦
                   </p>
                   <h2
                     className="mb-8"
-                    style={{ fontFamily: '"Great Vibes", cursive', fontSize: 'clamp(2.8rem, 8vw, 4.5rem)', color: '#1A3A2F' }}
+                    style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(2.8rem, 8vw, 4.5rem)', color: 'var(--color-w-emerald)' }}
                   >
                     Hosts
                   </h2>
 
                   {/* With Love */}
                   <div
-                    className="mb-6 p-5 sm:p-7 rounded-2xl"
-                    style={{
-                      background: 'rgba(253,248,240,0.9)',
-                      border: '1px solid rgba(201,150,42,0.25)',
-                      boxShadow: '0 10px 40px rgba(201,150,42,0.1)',
-                    }}
+                    className="mb-6 p-5 sm:p-7 rounded-[2rem] glass-card"
                   >
                     <div className="flex items-center justify-center gap-2 mb-4">
-                      <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, rgba(201,150,42,0.4))' }} />
-                      <span className="text-xs uppercase tracking-widest font-bold px-3"
-                        style={{ color: '#C9962A', fontFamily: '"Lato", sans-serif' }}>
+                      <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.4))' }} />
+                      <span className="text-xs uppercase tracking-widest font-semibold px-3"
+                        style={{ color: 'var(--color-w-gold)', fontFamily: 'var(--font-sans)' }}>
                         With Love
                       </span>
-                      <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, rgba(201,150,42,0.4), transparent)' }} />
+                      <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, rgba(212,175,55,0.4), transparent)' }} />
                     </div>
                     {WEDDING_DATA.hosts.withLove.map((host, i) => (
                       <p
                         key={i}
-                        className="text-base sm:text-lg font-semibold mb-1"
-                        style={{ color: '#1A3A2F', fontFamily: '"Cormorant Garamond", serif', letterSpacing: '0.02em' }}
+                        className="text-base sm:text-lg font-medium mb-1"
+                        style={{ color: 'var(--color-w-emerald)', fontFamily: 'var(--font-serif)', letterSpacing: '0.02em' }}
                       >
                         {host}
                       </p>
@@ -542,30 +507,26 @@ export default function App() {
 
                   {/* With Best Compliments */}
                   <div
-                    className="p-5 sm:p-7 rounded-2xl"
-                    style={{
-                      background: 'rgba(26,58,47,0.04)',
-                      border: '1px solid rgba(26,58,47,0.1)',
-                    }}
+                    className="p-5 sm:p-7 rounded-[2rem] glass-card bg-white/20"
                   >
                     <div className="flex items-center justify-center gap-2 mb-4">
-                      <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,58,47,0.2))' }} />
-                      <span className="text-xs uppercase tracking-widest font-bold px-3"
-                        style={{ color: 'rgba(26,58,47,0.5)', fontFamily: '"Lato", sans-serif' }}>
+                      <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, rgba(26,26,26,0.1))' }} />
+                      <span className="text-xs uppercase tracking-widest font-semibold px-3"
+                        style={{ color: 'rgba(26,26,26,0.5)', fontFamily: 'var(--font-sans)' }}>
                         With Best Compliments
                       </span>
-                      <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, rgba(26,58,47,0.2), transparent)' }} />
+                      <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, rgba(26,26,26,0.1), transparent)' }} />
                     </div>
                     <div className="flex flex-wrap justify-center gap-3">
                       {WEDDING_DATA.hosts.withCompliments.map((name, i) => (
                         <span
                           key={i}
-                          className="px-4 py-1.5 rounded-full text-sm font-semibold"
+                          className="px-4 py-1.5 rounded-full text-sm font-medium"
                           style={{
-                            background: 'rgba(201,150,42,0.12)',
-                            color: 'rgba(26,58,47,0.8)',
-                            border: '1px solid rgba(201,150,42,0.2)',
-                            fontFamily: '"Cormorant Garamond", serif',
+                            background: 'rgba(255,255,255,0.6)',
+                            color: 'var(--color-w-emerald)',
+                            border: '1px solid rgba(255,255,255,0.8)',
+                            fontFamily: 'var(--font-sans)',
                           }}
                         >
                           {name}
@@ -578,17 +539,15 @@ export default function App() {
               </div>
             </section>
 
-            {/* ── BRIDGE: light hosts → dark RSVP ── */}
-            <div style={{ height: '160px', background: 'linear-gradient(180deg, #F7EDD8 0%, #c8d8c0 30%, #3a6b52 65%, #0D2218 100%)', marginTop: '-2px' }} />
-
             {/* ── RSVP ──────────────────────────────────────────────────── */}
             <RSVPSection />
 
             {/* ── FOOTER ────────────────────────────────────────────────── */}
             <footer
               className="py-14 sm:py-20 text-center relative overflow-hidden"
-              style={{ background: 'linear-gradient(180deg, #071510 0%, #0D2218 40%, #1A3A2F 100%)' }}
             >
+              <div className="absolute inset-0 bg-white/40 backdrop-blur-3xl -z-10" />
+
               {/* Floating stars */}
               {[...Array(10)].map((_, i) => (
                 <motion.div
@@ -597,7 +556,7 @@ export default function App() {
                   style={{
                     left: `${8 + (i * 19) % 84}%`,
                     top: `${10 + (i * 17) % 80}%`,
-                    color: 'rgba(201,150,42,0.35)',
+                    color: 'rgba(212,175,55,0.4)',
                   }}
                   animate={{ opacity: [0.2, 0.8, 0.2], scale: [0.8, 1.2, 0.8] }}
                   transition={{ duration: 2 + i * 0.4, delay: i * 0.3, repeat: Infinity }}
@@ -619,51 +578,46 @@ export default function App() {
                   className="mb-4"
                 >
                   <Heart
-                    fill="#C9636B"
+                    fill="var(--color-w-gold)"
                     stroke="none"
-                    size={32}
-                    className="mx-auto"
+                    size={28}
+                    className="mx-auto opacity-80"
                   />
                 </motion.div>
 
                 <h2
                   className="mb-2"
                   style={{
-                    fontFamily: '"Great Vibes", cursive',
+                    fontFamily: 'var(--font-script)',
                     fontSize: 'clamp(3rem, 9vw, 5.5rem)',
-                    background: 'linear-gradient(135deg, #C9962A 0%, #E8C96D 50%, #C9962A 100%)',
-                    backgroundSize: '200% auto',
-                    WebkitBackgroundClip: 'text',
-                    backgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    animation: 'shimmer 6s linear infinite',
+                    color: 'var(--color-w-emerald)',
                   }}
                 >
-                  Althaf Hameed &amp; Fathima
+                  Althaf &amp; Fathima
                 </h2>
 
                 <p
                   className="text-xs uppercase tracking-[0.6em] mb-6"
-                  style={{ color: 'rgba(201,150,42,0.7)', fontFamily: '"Cinzel", serif' }}
+                  style={{ color: 'var(--color-w-gold)', fontFamily: 'var(--font-sans)', fontWeight: 600 }}
                 >
                   14 . 06 . 2026
                 </p>
 
                 <div className="flex items-center justify-center gap-3 mb-6">
-                  <div className="h-px w-16" style={{ background: 'linear-gradient(90deg, transparent, rgba(201,150,42,0.4))' }} />
-                  <span style={{ color: 'rgba(201,150,42,0.5)' }}>✿</span>
-                  <div className="h-px w-16" style={{ background: 'linear-gradient(90deg, rgba(201,150,42,0.4), transparent)' }} />
+                  <div className="h-px w-16" style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.4))' }} />
+                  <span style={{ color: 'rgba(212,175,55,0.6)' }}>✿</span>
+                  <div className="h-px w-16" style={{ background: 'linear-gradient(90deg, rgba(212,175,55,0.4), transparent)' }} />
                 </div>
 
                 <p
                   className="text-sm italic mb-2"
-                  style={{ color: 'rgba(253,248,240,0.35)', fontFamily: '"Cormorant Garamond", serif' }}
+                  style={{ color: 'var(--color-w-emerald)', fontFamily: 'var(--font-serif)', fontWeight: 500 }}
                 >
                   Surabhi Auditorium, Perambra
                 </p>
                 <p
-                  className="text-xs mb-8"
-                  style={{ color: 'rgba(253,248,240,0.2)', fontFamily: '"Lato", sans-serif', letterSpacing: '0.15em' }}
+                  className="text-[10px] sm:text-xs mb-8"
+                  style={{ color: 'rgba(26,26,26,0.4)', fontFamily: 'var(--font-sans)', letterSpacing: '0.15em', fontWeight: 600 }}
                 >
                   #AlthafFathimaWedding2026
                 </p>
@@ -674,9 +628,9 @@ export default function App() {
                 >
                   <p
                     className="text-[10px] uppercase tracking-[0.2em]"
-                    style={{ color: 'rgba(201,150,42,0.3)', fontFamily: '"Lato", sans-serif' }}
+                    style={{ color: 'rgba(26,26,26,0.3)', fontFamily: 'var(--font-sans)' }}
                   >
-                    Crafted with elegance by <strong style={{ color: 'rgba(201,150,42,0.5)', fontWeight: 600 }}>Webloomic</strong>
+                    Crafted with elegance by <strong style={{ color: 'rgba(26,26,26,0.5)', fontWeight: 700 }}>Webloomic</strong>
                   </p>
                 </div>
               </motion.div>

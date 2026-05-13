@@ -20,44 +20,22 @@ export function RSVPSection() {
       particleCount: 150,
       spread: 80,
       origin: { y: 0.6 },
-      colors: ['#C9962A', '#E8C96D', '#C9636B', '#F4D1D3', '#6BAF8A'],
+      colors: ['#D4AF37', '#F3E5AB', '#D8A7A7', '#1A1A1A', '#FCFAF8'],
     });
   };
 
   return (
     <section className="py-20 sm:py-28 relative overflow-hidden">
-      {/* Rich background */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: 'linear-gradient(160deg, #0D2218 0%, #1A3A2F 50%, #0D2218 100%)',
-        }}
-      />
+      {/* Soft glass overlay */}
+      <div className="absolute inset-0 bg-white/30 backdrop-blur-3xl -z-10" />
 
       {/* Decorative patterns */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Islamic star patterns */}
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute text-6xl sm:text-8xl opacity-[0.04]"
-            style={{
-              left: `${(i % 3) * 35 + 5}%`,
-              top: `${Math.floor(i / 3) * 55 + 10}%`,
-              color: '#C9962A',
-            }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 50 + i * 10, repeat: Infinity, ease: 'linear' }}
-          >
-            ✦
-          </motion.div>
-        ))}
-
-        {/* Falling petals */}
+        {/* Floating petals */}
         {['🌸', '🌺', '✿', '❀', '🌸', '🌺'].map((emoji, i) => (
           <motion.div
             key={`rsvp-petal-${i}`}
-            className="absolute text-lg opacity-20 pointer-events-none"
+            className="absolute text-lg opacity-[0.15] pointer-events-none"
             style={{ left: `${8 + i * 16}%`, top: '-5%' }}
             animate={{
               y: ['0vh', '110vh'],
@@ -88,24 +66,24 @@ export function RSVPSection() {
         >
           <p
             className="uppercase tracking-[0.5em] text-xs mb-3 font-semibold"
-            style={{ color: 'rgba(201,150,42,0.8)', fontFamily: '"Lato", sans-serif' }}
+            style={{ color: 'var(--color-w-gold)', fontFamily: 'var(--font-sans)' }}
           >
             ✦ &nbsp; Kindly Reply &nbsp; ✦
           </p>
           <h2
             className="mb-3"
             style={{
-              fontFamily: '"Great Vibes", cursive',
+              fontFamily: 'var(--font-script)',
               fontSize: 'clamp(2.8rem, 8vw, 4.5rem)',
-              color: '#E8C96D',
+              color: 'var(--color-w-emerald)',
             }}
           >
             Will You Join Us?
           </h2>
           <div className="flex items-center justify-center gap-3">
-            <div className="h-px w-16" style={{ background: 'linear-gradient(90deg, transparent, rgba(201,150,42,0.5))' }} />
-            <span style={{ color: 'rgba(201,150,42,0.6)', fontSize: '0.9rem' }}>✿</span>
-            <div className="h-px w-16" style={{ background: 'linear-gradient(90deg, rgba(201,150,42,0.5), transparent)' }} />
+            <div className="h-px w-16" style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.4))' }} />
+            <span style={{ color: 'rgba(212,175,55,0.6)', fontSize: '0.9rem' }}>✿</span>
+            <div className="h-px w-16" style={{ background: 'linear-gradient(90deg, rgba(212,175,55,0.4), transparent)' }} />
           </div>
         </motion.div>
 
@@ -115,12 +93,7 @@ export function RSVPSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
           viewport={{ once: true }}
-          className="rounded-3xl p-6 sm:p-8 md:p-10"
-          style={{
-            background: 'rgba(253,248,240,0.97)',
-            border: '1px solid rgba(201,150,42,0.25)',
-            boxShadow: '0 30px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,150,42,0.1)',
-          }}
+          className="rounded-3xl p-6 sm:p-8 md:p-10 glass-card"
         >
           {!submitted ? (
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -128,7 +101,7 @@ export function RSVPSection() {
               <div>
                 <label
                   className="block text-[10px] uppercase tracking-widest font-bold mb-2"
-                  style={{ color: 'rgba(26,58,47,0.6)', fontFamily: '"Lato", sans-serif' }}
+                  style={{ color: 'rgba(26,26,26,0.6)', fontFamily: 'var(--font-sans)' }}
                 >
                   Your Full Name
                 </label>
@@ -147,7 +120,7 @@ export function RSVPSection() {
                 <div>
                   <label
                     className="block text-[10px] uppercase tracking-widest font-bold mb-2"
-                    style={{ color: 'rgba(26,58,47,0.6)', fontFamily: '"Lato", sans-serif' }}
+                    style={{ color: 'rgba(26,26,26,0.6)', fontFamily: 'var(--font-sans)' }}
                   >
                     No. of Guests
                   </label>
@@ -166,7 +139,7 @@ export function RSVPSection() {
                 <div>
                   <label
                     className="block text-[10px] uppercase tracking-widest font-bold mb-2"
-                    style={{ color: 'rgba(26,58,47,0.6)', fontFamily: '"Lato", sans-serif' }}
+                    style={{ color: 'rgba(26,26,26,0.6)', fontFamily: 'var(--font-sans)' }}
                   >
                     Attending?
                   </label>
@@ -186,7 +159,7 @@ export function RSVPSection() {
               <div>
                 <label
                   className="block text-[10px] uppercase tracking-widest font-bold mb-2"
-                  style={{ color: 'rgba(26,58,47,0.6)', fontFamily: '"Lato", sans-serif' }}
+                  style={{ color: 'rgba(26,26,26,0.6)', fontFamily: 'var(--font-sans)' }}
                 >
                   Blessings & Wishes
                 </label>
@@ -201,16 +174,11 @@ export function RSVPSection() {
 
               {/* Submit */}
               <motion.button
-                whileHover={{ scale: 1.02, boxShadow: '0 10px 30px rgba(26,58,47,0.35)' }}
+                whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full py-4 rounded-xl flex items-center justify-center gap-2 font-bold uppercase tracking-[0.2em] text-sm transition-all"
-                style={{
-                  background: 'linear-gradient(135deg, #1A3A2F, #2D5E47)',
-                  color: '#E8C96D',
-                  border: '1px solid rgba(201,150,42,0.3)',
-                  fontFamily: '"Lato", sans-serif',
-                }}
+                className="w-full py-4 rounded-xl flex items-center justify-center gap-2 font-semibold uppercase tracking-[0.2em] text-sm transition-all glass-button"
+                style={{ fontFamily: 'var(--font-sans)' }}
               >
                 Send Blessings <Send size={15} />
               </motion.button>
@@ -227,19 +195,19 @@ export function RSVPSection() {
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
                 className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
-                style={{ background: 'rgba(107,175,138,0.15)', color: '#2D5E47' }}
+                style={{ background: 'var(--color-w-champagne-light)', color: 'var(--color-w-champagne)' }}
               >
                 <CheckCircle size={40} />
               </motion.div>
               <h3
                 className="mb-2"
-                style={{ fontFamily: '"Great Vibes", cursive', fontSize: '2.8rem', color: '#1A3A2F' }}
+                style={{ fontFamily: 'var(--font-script)', fontSize: '2.8rem', color: 'var(--color-w-emerald)' }}
               >
                 JazakAllah Khair!
               </h3>
               <p
                 className="italic text-sm mb-2"
-                style={{ color: 'rgba(26,58,47,0.6)', fontFamily: '"Cormorant Garamond", serif' }}
+                style={{ color: 'rgba(26,26,26,0.7)', fontFamily: 'var(--font-serif)' }}
               >
                 Thank you, {formState.name.split(' ')[0]}! Your response has been noted.
                 <br />We look forward to celebrating with you!
@@ -248,9 +216,9 @@ export function RSVPSection() {
                 onClick={() => setSubmitted(false)}
                 className="mt-6 text-[10px] uppercase tracking-widest font-bold border-b pb-0.5 transition-colors"
                 style={{
-                  color: 'rgba(201,150,42,0.7)',
-                  borderColor: 'rgba(201,150,42,0.4)',
-                  fontFamily: '"Lato", sans-serif',
+                  color: 'var(--color-w-gold)',
+                  borderColor: 'rgba(212,175,55,0.4)',
+                  fontFamily: 'var(--font-sans)',
                 }}
               >
                 Edit Response
