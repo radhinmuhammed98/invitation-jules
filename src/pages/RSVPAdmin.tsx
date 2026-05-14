@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore/lite';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore/lite';
 import { db } from '../firebase';
-import { motion } from 'motion/react';
-import { Users, UserCheck, MessageSquare } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Users, UserCheck, MessageSquare, Trash2, Loader2 } from 'lucide-react';
 
 interface RSVP {
   id: string;
@@ -16,28 +16,44 @@ interface RSVP {
 export function RSVPAdmin() {
   const [rsvps, setRsvps] = useState<RSVP[]>([]);
   const [loading, setLoading] = useState(true);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const fetchRSVPs = async () => {
+    setLoading(true);
+    try {
+      const querySnapshot = await getDocs(collection(db, "rsvps"));
+      const data: RSVP[] = [];
+      querySnapshot.forEach((doc) => {
+        data.push({ id: doc.id, ...doc.data() } as RSVP);
+      });
+      // Sort by newest first
+      data.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+      setRsvps(data);
+    } catch (error) {
+      console.error("Error fetching RSVPs: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchRSVPs = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "rsvps"));
-        const data: RSVP[] = [];
-        querySnapshot.forEach((doc) => {
-          data.push({ id: doc.id, ...doc.data() } as RSVP);
-        });
-        // Sort by newest first
-        data.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-        setRsvps(data);
-      } catch (error) {
-        console.error("Error fetching RSVPs: ", error);
-        // Note: Error is expected here if Firebase is not yet configured.
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchRSVPs();
   }, []);
+
+  const handleDelete = async (id: string) => {
+    if (!window.confirm("Are you sure you want to delete this RSVP?")) return;
+    
+    setDeletingId(id);
+    try {
+      await deleteDoc(doc(db, "rsvps", id));
+      setRsvps(rsvps.filter(r => r.id !== id));
+    } catch (error) {
+      console.error("Error deleting RSVP: ", error);
+      alert("Failed to delete RSVP.");
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   const totalResponses = rsvps.length;
   const totalAttending = rsvps.filter(r => r.attending === 'yes').length;
@@ -48,9 +64,17 @@ export function RSVPAdmin() {
   return (
     <div className="min-h-screen p-6 sm:p-12 font-sans text-emerald-900 bg-emerald-50/30">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-10">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-2 text-emerald-900 font-serif">RSVP Dashboard</h1>
-          <p className="text-emerald-700/70">Manage your guest responses in real-time.</p>
+        <div className="mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <h1 className="text-3xl sm:text-4xl font-bold mb-2 text-emerald-900 font-serif">RSVP Dashboard</h1>
+            <p className="text-emerald-700/70">Manage your guest responses in real-time.</p>
+          </div>
+          <button 
+            onClick={fetchRSVPs}
+            className="px-6 py-2 bg-emerald-700 text-white rounded-full text-sm font-semibold hover:bg-emerald-800 transition-colors shadow-sm"
+          >
+            Refresh Data
+          </button>
         </div>
 
         {/* Stats Row */}
@@ -97,37 +121,57 @@ export function RSVPAdmin() {
                   <th className="px-6 py-4 text-xs font-semibold text-emerald-700/70 uppercase tracking-wider">Guests</th>
                   <th className="px-6 py-4 text-xs font-semibold text-emerald-700/70 uppercase tracking-wider">Message</th>
                   <th className="px-6 py-4 text-xs font-semibold text-emerald-700/70 uppercase tracking-wider">Date</th>
+                  <th className="px-6 py-4 text-xs font-semibold text-emerald-700/70 uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-emerald-50">
-                {loading ? (
+                {loading && rsvps.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="px-6 py-12 text-center text-emerald-600/50">
+                    <td colSpan={6} className="px-6 py-12 text-center text-emerald-600/50">
                       Loading RSVPs...
                     </td>
                   </tr>
                 ) : rsvps.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="px-6 py-12 text-center text-emerald-600/50">
-                      No responses yet. (Or Firebase is not configured properly).
+                    <td colSpan={6} className="px-6 py-12 text-center text-emerald-600/50">
+                      No responses yet.
                     </td>
                   </tr>
                 ) : (
-                  rsvps.map((rsvp) => (
-                    <tr key={rsvp.id} className="hover:bg-emerald-50/30 transition-colors">
-                      <td className="px-6 py-4 font-medium">{rsvp.name}</td>
-                      <td className="px-6 py-4">
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${rsvp.attending === 'yes' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                          {rsvp.attending === 'yes' ? 'Yes' : 'No'}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4">{rsvp.guests}</td>
-                      <td className="px-6 py-4 text-sm text-emerald-800/80 max-w-xs truncate">{rsvp.message || '-'}</td>
-                      <td className="px-6 py-4 text-sm text-emerald-800/60">
-                        {new Date(rsvp.timestamp).toLocaleDateString()}
-                      </td>
-                    </tr>
-                  ))
+                  <AnimatePresence>
+                    {rsvps.map((rsvp) => (
+                      <motion.tr 
+                        key={rsvp.id} 
+                        layout
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        className="hover:bg-emerald-50/30 transition-colors"
+                      >
+                        <td className="px-6 py-4 font-medium">{rsvp.name}</td>
+                        <td className="px-6 py-4">
+                          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${rsvp.attending === 'yes' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                            {rsvp.attending === 'yes' ? 'Yes' : 'No'}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4">{rsvp.guests}</td>
+                        <td className="px-6 py-4 text-sm text-emerald-800/80 max-w-xs truncate">{rsvp.message || '-'}</td>
+                        <td className="px-6 py-4 text-sm text-emerald-800/60">
+                          {new Date(rsvp.timestamp).toLocaleDateString()}
+                        </td>
+                        <td className="px-6 py-4 text-right">
+                          <button
+                            onClick={() => handleDelete(rsvp.id)}
+                            disabled={deletingId === rsvp.id}
+                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
+                            title="Delete RSVP"
+                          >
+                            {deletingId === rsvp.id ? <Loader2 size={18} className="animate-spin" /> : <Trash2 size={18} />}
+                          </button>
+                        </td>
+                      </motion.tr>
+                    ))}
+                  </AnimatePresence>
                 )}
               </tbody>
             </table>

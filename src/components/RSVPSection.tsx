@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
 import { Send, CheckCircle, ChevronDown, Loader2 } from 'lucide-react';
-import { collection, addDoc } from 'firebase/firestore/lite';
+import { collection, addDoc, doc, updateDoc } from 'firebase/firestore/lite';
 import { db } from '../firebase';
 
 const ATTENDANCE_OPTIONS = [
@@ -79,6 +79,7 @@ export function RSVPSection() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [docId, setDocId] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -86,14 +87,22 @@ export function RSVPSection() {
     setError('');
 
     try {
-      // Add a new document to the "rsvps" collection
-      await addDoc(collection(db, "rsvps"), {
+      const data = {
         name: formState.name,
         guests: formState.guests,
         attending: formState.attending,
         message: formState.message,
         timestamp: new Date().toISOString()
-      });
+      };
+
+      if (docId) {
+        // Use static updateDoc and doc for editing
+        await updateDoc(doc(db, "rsvps", docId), data);
+      } else {
+        // Add a new document to the "rsvps" collection
+        const docRef = await addDoc(collection(db, "rsvps"), data);
+        setDocId(docRef.id);
+      }
 
       setSubmitted(true);
       confetti({
@@ -103,7 +112,7 @@ export function RSVPSection() {
         colors: ['#D4AF37', '#F3E5AB', '#D8A7A7', '#1A1A1A', '#FCFAF8'],
       });
     } catch (err: any) {
-      console.error("Error adding RSVP: ", err);
+      console.error("Error adding/updating RSVP: ", err);
       setError("Failed to submit. Please check your connection.");
     } finally {
       setLoading(false);
