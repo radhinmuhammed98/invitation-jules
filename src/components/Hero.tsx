@@ -90,24 +90,18 @@ export function Hero() {
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
       style={{ minHeight: '100svh', background: 'var(--color-w-cream)' }}
     >
-      {/* === DECORATED HERO BACKGROUND === */}
+      {/* === HERO BACKGROUND === */}
       <motion.div style={{ y }} className="absolute inset-0 z-0">
-        {/* Soft radial gradient base */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_center,_#FCFAF8_0%,_#F5EFE6_50%,_#EBE1D0_100%)]" />
-        
-        {/* Intricate SVG Pattern Overlay */}
         <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 C60 20 80 40 100 50 C80 60 60 80 50 100 C40 80 20 60 0 50 C20 40 40 20 50 0 Z' fill='%23D4AF37'/%3E%3Ccircle cx='50' cy='50' r='10' fill='none' stroke='%23D4AF37' stroke-width='1'/%3E%3C/svg%3E")`,
-            backgroundSize: '80px 80px',
-            backgroundPosition: 'center',
-          }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: 'url("/photo_collage.jpg")' }}
         />
-
-        {/* Elegant Gold Accents (Gradients) */}
-        <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full blur-[120px] bg-[rgba(212,175,55,0.15)] pointer-events-none" />
-        <div className="absolute top-[40%] -right-[10%] w-[40%] h-[60%] rounded-full blur-[100px] bg-[rgba(212,175,55,0.1)] pointer-events-none" />
+        
+        {/* Dark gradient overlay for text readability */}
+        <div 
+          className="absolute inset-0 backdrop-blur-[3px]" 
+          style={{ background: 'linear-gradient(to bottom, rgba(13,34,24,0.85) 0%, rgba(13,34,24,0.65) 40%, rgba(13,34,24,0.7) 60%, rgba(13,34,24,0.95) 100%)' }}
+        />
       </motion.div>
 
       {/* Fade-to-cream at the bottom for seamless blending */}
@@ -119,10 +113,8 @@ export function Hero() {
         }}
       />
 
-      {/* === FALLING PETALS === */}
-      {petalsConfig.map((p, i) => (
-        <FallingPetal key={i} emoji={p.emoji} left={p.left} delay={p.delay} duration={p.duration} />
-      ))}
+      {/* === ANIMATED FLORALS === */}
+      {/* (Removed broken image links, using cleaner minimal look) */}
 
       {/* === HERO CONTENT === */}
       <motion.div
@@ -161,6 +153,7 @@ export function Hero() {
               color: 'var(--color-w-gold)',
               fontFamily: '"Amiri", serif',
               fontWeight: 700,
+              textShadow: '0 2px 10px rgba(0,0,0,0.5)',
             }}
           >
             بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
@@ -172,7 +165,8 @@ export function Hero() {
               fontFamily: 'var(--font-script)',
               fontWeight: 400,
               fontSize: 'clamp(3.5rem, 12vw, 8rem)',
-              color: 'var(--color-w-emerald)',
+              color: '#FCFAF8', // Cream color for better contrast against dark overlay
+              textShadow: '0 4px 20px rgba(0,0,0,0.5)',
             }}
           >
             Althaf
@@ -194,23 +188,36 @@ export function Hero() {
           </h1>
         </motion.div>
 
-        {/* Date pill */}
+        {/* Date pill & Countdown */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, duration: 0.9 }}
-          className="mb-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-[10vh]"
+          className="mb-8 flex flex-col items-center justify-center gap-6 mt-[6vh]"
         >
           <div
-            className="px-8 py-3.5 rounded-full text-sm font-bold tracking-widest glass-card"
+            className="px-8 py-3.5 rounded-full text-sm font-bold tracking-widest backdrop-blur-md"
             style={{
-              color: 'var(--color-w-emerald)',
+              color: '#FCFAF8',
               fontFamily: 'var(--font-sans)',
               border: '1px solid rgba(212,175,55,0.4)',
-              boxShadow: '0 8px 30px rgba(212,175,55,0.15)'
+              background: 'rgba(26,58,47,0.4)',
+              boxShadow: '0 8px 30px rgba(0,0,0,0.3)'
             }}
           >
             14 . 06 . 2026
+          </div>
+
+          {/* Countdown Timer */}
+          <div className="flex gap-4 sm:gap-6 backdrop-blur-md p-4 rounded-2xl" style={{
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(212,175,55,0.2)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.2)'
+          }}>
+            <CountdownUnit value={days} label="Days" />
+            <CountdownUnit value={hours} label="Hours" />
+            <CountdownUnit value={minutes} label="Mins" />
+            <CountdownUnit value={seconds} label="Secs" />
           </div>
         </motion.div>
       </motion.div>

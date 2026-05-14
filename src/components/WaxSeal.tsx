@@ -83,24 +83,26 @@ function EnvelopeFlap({ side, isRevealed }: { side: 'left' | 'right'; isRevealed
       animate={isRevealed ? { x: side === 'left' ? '-100%' : '100%', opacity: 0 } : { x: 0, opacity: 1 }}
       transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
     >
-      {/* Subtle texture */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-rule='evenodd'%3E%3Cpolygon points='30,5 35,20 50,20 38,29 43,44 30,35 17,44 22,29 10,20 25,20' /%3E%3C/g%3E%3C/svg%3E")`,
-        backgroundSize: '60px 60px',
+      {/* Subtle paper texture */}
+      <div className="absolute inset-0 opacity-[0.4]" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+        mixBlendMode: 'overlay',
       }} />
+
+      {/* Realistic Drop Shadow for the flaps to create depth */}
+      <div 
+        className="absolute inset-0 pointer-events-none" 
+        style={{
+          boxShadow: side === 'left' 
+            ? 'inset -15px 0 30px -15px rgba(0,0,0,0.2), inset -2px 0 5px -2px rgba(0,0,0,0.1)'
+            : 'inset 15px 0 30px -15px rgba(0,0,0,0.2), inset 2px 0 5px -2px rgba(0,0,0,0.1)',
+        }}
+      />
 
       {/* Gold seam line */}
       <div className="absolute top-0 bottom-0" style={{ width: 1, background: 'linear-gradient(to bottom, transparent 0%, rgba(212,175,55,0.3) 30%, rgba(212,175,55,0.6) 50%, rgba(212,175,55,0.3) 70%, transparent 100%)', right: side === 'left' ? 0 : 'auto', left: side === 'right' ? 0 : 'auto' }} />
 
-      {/* Falling petals */}
-      {['🌸', '🌺', '✿'].map((e, i) => (
-        <motion.div key={i} className="absolute text-lg select-none pointer-events-none"
-          style={{ left: `${10 + i * 35}%`, top: '-5%', opacity: 0.15 }}
-          animate={{ y: ['0vh', '110vh'], rotate: [0, 360], opacity: [0, 0.2, 0] }}
-          transition={{ duration: 9 + i * 2, delay: i * 2, repeat: Infinity, ease: 'linear' }}>
-          {e}
-        </motion.div>
-      ))}
+      {/* Falling petals - removed in favor of a cleaner realistic look */}
     </motion.div>
   );
 }
@@ -137,7 +139,12 @@ export function WaxSeal({ onOpen, isOpen }: WaxSealProps) {
           exit={{ opacity: 0 }} transition={{ duration: 0.4, delay: 0.8 }}>
 
           {/* ── BACKGROUND ── */}
-          <div className="absolute inset-0" style={{ background: 'var(--color-w-cream)' }} />
+          <div className="absolute inset-0" style={{ background: 'var(--color-w-cream)' }}>
+            <div className="absolute inset-0 opacity-[0.2]" style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+              mixBlendMode: 'multiply',
+            }} />
+          </div>
 
           {/* Center radial glow */}
           <div className="absolute pointer-events-none" style={{ width: 500, height: 500, top: '50%', left: '50%', transform: 'translate(-50%, -55%)', background: 'radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)', borderRadius: '50%' }} />
@@ -185,23 +192,23 @@ export function WaxSeal({ onOpen, isOpen }: WaxSealProps) {
                   style={{
                     width: 132, height: 132,
                     borderRadius: '50%',
-                    background: 'linear-gradient(135deg, #F3E5AB, #D4AF37)',
-                    border: '3px solid rgba(255,255,255,0.6)',
-                    boxShadow: '0 10px 30px rgba(212,175,55,0.3), inset 0 2px 10px rgba(255,255,255,0.8)',
+                    background: 'linear-gradient(135deg, #1A3A2F, #0A1C14)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.6), inset 0 6px 12px rgba(255,255,255,0.15), inset 0 -8px 15px rgba(0,0,0,0.8), inset 0 0 5px rgba(26,58,47,1)',
                   }}>
-                  <div className="absolute" style={{ inset: 9, borderRadius: '50%', border: '1px solid rgba(255,255,255,0.4)' }} />
+                  <div className="absolute" style={{ inset: 9, borderRadius: '50%', border: '1px solid rgba(212,175,55,0.3)', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.5)' }} />
 
                   {/* Monogram */}
                   <div className="relative z-10 flex flex-col items-center select-none">
                     <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.15em' }}>
                       {['A', 'F'].map((letter, i) => (
-                        <span key={letter} style={{
+                         <span key={letter} style={{
                           fontFamily: '"Cinzel", serif',
                           fontSize: i === 0 ? '2.1rem' : '1.7rem',
                           fontWeight: 700,
-                          background: 'linear-gradient(180deg, #FFF5CC 0%, #E8C96D 40%, #C9962A 100%)',
+                          background: 'linear-gradient(180deg, #FFF5CC 0%, #D4AF37 40%, #AA8015 100%)',
                           WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent',
-                          textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                          filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.5))'
                         }}>{letter}</span>
                       ))}
                     </div>

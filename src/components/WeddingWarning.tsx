@@ -108,6 +108,11 @@ export function WeddingWarning() {
         >
           — Warning from the Groom's Friends 🫵
         </span>
+
+        {/* Petrol Disclaimer */}
+        <p className="mt-4 text-[10px] opacity-70" style={{ color: 'rgba(201,99,107,0.8)' }}>
+          NB: പെട്രോൾ അടിക്കാൻ പൈസ ഇല്ലാത്തതുകൊണ്ട് സ്വന്തം ചിലവിൽ വരണമെന്ന് അപേക്ഷിക്കുന്നു.
+        </p>
       </div>
     </motion.div>
   );
